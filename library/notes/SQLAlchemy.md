@@ -12,7 +12,7 @@ Core can be used to interact with any db without setting up any schema classes a
 - example of simple ops in core vs ORM: https://chatgpt.com/share/d0315806-2109-4e9c-a523-eb0a7835f141
 
 > [!see also]
-> [[Transactions]]
+> [[library/notes/Transactions]]
 
 
 

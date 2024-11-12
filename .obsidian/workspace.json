@@ -1,0 +1,234 @@
+{
+  "main": {
+    "id": "b9dc23de435ece81",
+    "type": "split",
+    "children": [
+      {
+        "id": "f142e020ad74f6a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b083579fe249c43",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6a57a5a419774fc1",
+    "type": "split",
+    "children": [
+      {
+        "id": "bd96c7cd9be302e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e620797c5c0a8312",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTime"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "1720edbf1c1ba0d8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "jupy",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "byModifiedTime"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "27057c2d9e9818a0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 283.5026054382324
+  },
+  "right": {
+    "id": "10048318e88c3884",
+    "type": "split",
+    "children": [
+      {
+        "id": "ddeb7e4e3556d343",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "de40c4869bb62fbd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "economics of a cook in gurgaon..md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for economics of a cook in gurgaon."
+            }
+          },
+          {
+            "id": "e956951a747b273d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "economics of a cook in gurgaon..md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from economics of a cook in gurgaon."
+            }
+          },
+          {
+            "id": "c22f56c62bbd2cbb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "55963bc2ba2c06c4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "0dd39dbe4a297e43",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "5322666b6b36c1df",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 467.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "graph:Open graph view": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "omnisearch:Omnisearch": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "8b083579fe249c43",
+  "lastOpenFiles": [
+    "library/misc/economics of a cook in gurgaon..md",
+    "library/misc/gym.md",
+    "library/misc/passwords.md",
+    "library/misc",
+    "library/journal",
+    "library/gym.md",
+    "library/passwords.md",
+    "media/Transposed-Convolutional-2.png",
+    "media/Transposed-Convolutional-1.png",
+    "media/Screenshot 2024-08-22 at 3.17.26 AM.png",
+    "media/Screenshot 2024-08-21 at 2.30.09 AM.png",
+    "media/Screenshot 2024-08-19 at 8.36.24 PM.png",
+    "media/Screenshot 2024-08-19 at 6.16.42 PM.png",
+    "media/Screenshot 2024-08-15 at 11.16.54 PM.png",
+    "media/Screenshot 2024-08-15 at 11.14.35 PM.png",
+    "media/Screenshot 2024-08-15 at 11.11.59 PM.png",
+    "media/Screenshot 2024-08-15 at 11.10.47 PM.png",
+    "media/Screen Recording 2024-07-27 at 9.22.24 PM.mov",
+    "library/notes/Inter-repo actions workflows.md",
+    "fmt/notes/Inter-repo actions workflows.md",
+    "library/utils/random python functions.md",
+    "fmt/Syncups.md",
+    "fmt/Monthly syncups.md",
+    "Interesting blogs and papers.md",
+    "fmt/notes/Inter-repo workflows.md",
+    "library/notes/probability.md",
+    "fmt/meeting notes/Monthly syncups.md",
+    "meeting notes/Project Reviews.md",
+    "personal tracker/get a job.md",
+    "temp4d/Wheat photo-taking SOP.md",
+    "temp4d/How to cleanup and finetune wheat grains..md",
+    "sql utils.md",
+    "economics of a cook in gurgaon..md",
+    "Untitled.canvas",
+    "gym.md",
+    "passwords.md",
+    "library_fmt/passwords.md",
+    "fraud detection.md",
+    "library/utils/torch utils.md",
+    "library/utils/random issues.md",
+    "library/utils",
+    "library/notes/vision",
+    "library/notes/nlp",
+    "library/notes/llms",
+    "library/notes/interview",
+    "library/notes/bash",
+    "library/notes/DS",
+    "Untitled 1.canvas"
+  ]
+}

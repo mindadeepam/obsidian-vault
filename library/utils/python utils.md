@@ -12,7 +12,7 @@
 
 
 ### multithreading
-check this out [[Multiprocessing vs Multithreading vs Asyncio]]
+check this out [[library/notes/Multiprocessing vs Multithreading vs Asyncio]]
 
 
 ### heapq module

@@ -1,0 +1,6 @@
+{
+  "format": "DD-MM-YYYY",
+  "folder": "personal tracker/daily",
+  "template": "personal tracker/daily/template",
+  "autorun": false
+}
