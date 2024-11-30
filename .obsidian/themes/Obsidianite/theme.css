@@ -124,6 +124,7 @@ a.tag[href*='#待完成'] {
   background-color: #be2e5e;
   color: #fff;
 }
+
 /* For Editor Mode */
 .cm-s-obsidian .CodeMirror-line span.cm-tag-todo:not(.cm-formatting-hashtag) {
   color: #ee6a96;
@@ -249,12 +250,13 @@ a.tag[href*='#想法'] {
 .nav-folder-collapse-indicator {
   color: var(--text-accent);
 }
-.nav-file.is-active > .nav-file-title,
-.nav-file.is-active > .nav-folder-title,
-.nav-file.is-active > .nav-folder-collapse-indicator,
-.nav-folder.is-active > .nav-file-title,
-.nav-folder.is-active > .nav-folder-title,
-.nav-folder.is-active > .nav-folder-collapse-indicator {
+
+.nav-file.is-active>.nav-file-title,
+.nav-file.is-active>.nav-folder-title,
+.nav-file.is-active>.nav-folder-collapse-indicator,
+.nav-folder.is-active>.nav-file-title,
+.nav-folder.is-active>.nav-folder-title,
+.nav-folder.is-active>.nav-folder-collapse-indicator {
   color: var(--text-accent);
 }
 
@@ -267,6 +269,7 @@ a.tag[href*='#想法'] {
   opacity: 0.5;
   cursor: pointer;
 }
+
 .side-dock-ribbon-tab:hover,
 .side-dock-ribbon-action:hover,
 .workspace-ribbon-collapse-btn:hover,
@@ -279,6 +282,7 @@ a.tag[href*='#想法'] {
 .workspace-ribbon.is-collapsed {
   background-color: var(--background-primary-alt);
 }
+
 /** Left side menu border **/
 .workspace-ribbon.mod-left.is-collapsed,
 .workspace-ribbon.mod-right.is-collapsed {
@@ -314,14 +318,16 @@ body:not(.is-grabbing) .nav-file-title:hover,
 body:not(.is-grabbing) .nav-folder-title:hover {
   color: var(--text-accent);
 }
+
 /** Folder list active arrow **/
 body:not(.is-grabbing) .nav-file-title:hover .nav-folder-collapse-indicator,
 body:not(.is-grabbing) .nav-folder-title:hover .nav-folder-collapse-indicator {
   color: var(--text-accent);
 }
+
 /** Folder List main title **/
-.nav-folder.mod-root > .nav-file-title,
-.nav-folder.mod-root > .nav-folder-title {
+.nav-folder.mod-root>.nav-file-title,
+.nav-folder.mod-root>.nav-folder-title {
   color: var(--text-accent);
 }
 
@@ -347,8 +353,10 @@ body:not(.is-grabbing) .nav-folder-title:hover .nav-folder-collapse-indicator {
 
 /* except list markers */
 span.cm-formatting-list,
-/*code block backticks */ span.cm-formatting-code-block.cm-hmd-codeblock,
-/* optionally header hashes */ span.cm-formatting-header {
+/*code block backticks */
+span.cm-formatting-code-block.cm-hmd-codeblock,
+/* optionally header hashes */
+span.cm-formatting-header {
   display: inline !important;
 }
 
@@ -380,7 +388,7 @@ span.cm-formatting-list,
   padding-left: 30px;
 }
 
-.markdown-preview-view ul > li.task-list-item {
+.markdown-preview-view ul>li.task-list-item {
   text-indent: -3em;
 }
 
@@ -435,12 +443,12 @@ span.cm-formatting-list,
   z-index: 5;
 }
 
-.markdown-preview-view ul > li.task-list-item.is-checked {
+.markdown-preview-view ul>li.task-list-item.is-checked {
   text-decoration: line-through !important;
   color: var(--interactive-accent) !important;
 }
 
-.markdown-preview-view ul > li.task-list-item.is-checked ul > li:not(.is-checked) {
+.markdown-preview-view ul>li.task-list-item.is-checked ul>li:not(.is-checked) {
   text-decoration: none !important;
   color: var(--text-normal) !important;
 }
@@ -452,12 +460,14 @@ span.cm-formatting-list,
     border-color: #212121;
     transform: translate(0, 0) rotate(45deg);
   }
+
   33% {
     width: 4px;
     height: 0;
     border-color: #212121;
     transform: translate(0, 0) rotate(45deg);
   }
+
   100% {
     width: 4px;
     height: 8px;
@@ -471,10 +481,12 @@ span.cm-formatting-list,
     border-width: 2px;
     /* transform: scale(1); */
   }
+
   33% {
     border-width: 4px;
     /* transform: scale(0.7); */
   }
+
   100% {
     border-width: 10px;
     /* transform: scale(1); */
@@ -620,7 +632,7 @@ strong {
   padding: 0;
   color: #7aa2f7;
   background-color: #7aa2f7;
-  background-image: linear-gradient(62deg, #87c2fd 0%, #dcb9fc 100%) !important;
+  background-image: none !important;
 }
 
 strong .math.math-inline .MathJax {
@@ -685,20 +697,18 @@ em {
 /** editor mode **/
 .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline,
 .cm-s-obsidian span.cm-hmd-internal-link .cm-underline {
-  color: var(--text-normal);
-  -webkit-text-fill-color: var(--text-normal);
+  color: var(--text-accent);
+  -webkit-text-fill-color: var(--text-accent);
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 5px 5px;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
-  background-image: linear-gradient(
-    to bottom,
-    var(--bg-sub-accent-55) 0%,
-    var(--bg-sub-accent-55) 100%
-  );
+  background-image: linear-gradient(to bottom,
+      var(--bg-sub-accent-55) 0%,
+      var(--bg-sub-accent-55) 100%);
 }
 
 .cm-s-obsidian span.cm-formatting-link {
@@ -713,21 +723,19 @@ cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
 
 .internal-link,
 .external-link {
-  color: var(--text-normal);
+  text-decoration: underline;
+  color: var(--text-accent);
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 5px 5px;
-  text-decoration: none;
   transition: background 350ms ease-in-out;
 }
 
 .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline,
 .external-link {
-  background-image: linear-gradient(
-    to bottom,
-    var(--bg-sub-accent-55) 0%,
-    var(--bg-sub-accent-55) 100%
-  );
+  background-image: linear-gradient(to bottom,
+      var(--bg-sub-accent-55) 0%,
+      var(--bg-sub-accent-55) 100%);
   transition: background 350ms ease-in-out;
 }
 
@@ -739,18 +747,18 @@ cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
 
 .internal-link:hover,
 .cm-s-obsidian span.cm-hmd-internal-link .cm-underline:hover {
-  -webkit-text-fill-color: #fff;
-  color: #fff;
+  -webkit-text-fill-color: var(--text-accent);
+  color: var(--text-accent);
   background-size: 4px 50px;
-  text-decoration-line: none !important;
+  text-decoration: underline;
 }
 
 .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline:hover,
 .external-link:hover {
-  -webkit-text-fill-color: #fff;
-  color: #fff;
+  -webkit-text-fill-color: var(--text-accent);
+  color: var(--text-accent);
   background-size: 4px 50px;
-  text-decoration-line: none !important;
+  text-decoration: underline;
 }
 
 /* link */
@@ -758,7 +766,6 @@ a,
 .internal-link,
 .cm-hmd-internal-link,
 .cm-link {
-  text-decoration: none !important;
   color: var(--text-normal);
   position: relative;
   z-index: 1;
@@ -778,7 +785,7 @@ a,
 /* link hover color */
 a:hover,
 .internal-link:hover {
-  text-decoration: none !important;
+  text-decoration: underline;
   color: var(--text-accent);
 }
 
@@ -841,10 +848,7 @@ h6 a.tag {
 | INLINE CODE STYLING
 **--------------------**/
 
-.CodeMirror-activeline
-  span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(
-    .obsidian-search-match-highlight
-  ) {
+.CodeMirror-activeline span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -999,60 +1003,48 @@ blockquote {
 }
 
 /* blockquote style overwrite */
-
 .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote,
 .markdown-preview-view blockquote {
   position: relative;
   padding: 1rem 2rem 1rem 3rem;
-  color: #bdbdbd;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  color: var(--text-normal);
+  border-radius: 4px;
   margin-bottom: 2em;
   margin-right: 0 !important;
-  border-left: 3px rgba(14, 210, 247, 0.5) solid;
+  border-left: 3px var(--text-accent) solid;
   border-top: transparent;
   border-bottom: transparent;
   border-right: transparent;
-  background: linear-gradient(135deg, rgba(32, 28, 41, 0.45), #100e17);
+  background-color: rgba(14, 210, 247, 0.05);
 }
 
+/* Simplified top border */
 .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote::before,
 .markdown-preview-view blockquote::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0px;
+  left: 0;
   height: 2px;
-  width: 60%;
-  background: linear-gradient(90deg, rgba(13, 185, 215, 0.5), #13111a);
+  width: 100%;
+  background: var(--text-accent);
+  opacity: 0.2;
 }
 
-.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote + .HyperMD-quote::before {
-  display: none;
-}
-
+/* Simplified bottom border */
 .HyperMD-quote::after,
 .markdown-preview-view blockquote::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0px;
+  left: 0;
   height: 2px;
-  width: 25%;
-  background: linear-gradient(90deg, rgba(13, 185, 215, 0.5), #15131c);
+  width: 100%;
+  background: var(--text-accent);
+  opacity: 0.1;
 }
 
-.HyperMD-quote.HyperMD-quote-2::before,
-.HyperMD-quote.HyperMD-quote-3::before,
-.HyperMD-quote.HyperMD-quote-4::before,
-.HyperMD-quote.HyperMD-quote-5::before {
-  height: 0;
-}
-
-.markdown-preview-view blockquote p {
-  position: relative;
-}
-
+/* Keep the quote marker styling */
 .markdown-preview-view blockquote p:first-of-type::before {
   content: '!!';
   font-style: italic;
@@ -1072,6 +1064,7 @@ blockquote {
 .cm-s-obsidian span.cm-atom {
   color: var(--text-faint);
 }
+
 .cm-s-obsidian span.cm-meta {
   color: var(--text-accent);
 }
@@ -1085,10 +1078,7 @@ blockquote {
 **--------------------**/
 
 /** inline code */
-.cm-s-obsidian
-  span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(
-    .obsidian-search-match-highlight
-  ),
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight),
 .markdown-preview-view code {
   overflow-wrap: break-word;
   background-color: rgba(14, 210, 247, 0.05);
@@ -1098,7 +1088,7 @@ blockquote {
   color: rgba(14, 210, 247, 0.9) !important;
 }
 
-.theme-dark :not(pre) > code[class*='language-'],
+.theme-dark :not(pre)>code[class*='language-'],
 .theme-dark pre[class*='language-'] {
   background-color: var(--background-secondary);
 }
@@ -1112,49 +1102,64 @@ blockquote {
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-comment {
   color: #6272a4;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-string,
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-string-2 {
   color: #f1fa8c;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-number {
   color: #bd93f9;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-variable {
   color: #50fa7b;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-variable-2 {
   color: white;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-def {
   color: #50fa7b;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-operator {
   color: #ff79c6;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-keyword {
   color: #ff79c6;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-atom {
   color: #bd93f9;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-meta {
   color: #f8f8f2;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-tag {
   color: #ff79c6;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-attribute {
   color: #50fa7b;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-qualifier {
   color: #50fa7b;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-property {
   color: #66d9ef;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-builtin {
   color: #50fa7b;
 }
+
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-variable-3,
 .theme-dark .cm-s-obsidian pre.HyperMD-codeblock span.cm-type {
   color: #ffb86c;
@@ -1219,6 +1224,7 @@ code[class*='language-'] ::selection {
 }
 
 @media print {
+
   code[class*='language-'],
   pre[class*='language-'] {
     text-shadow: none;
@@ -1226,13 +1232,13 @@ code[class*='language-'] ::selection {
 }
 
 /* Code blocks */
-:not(pre) > code[class*='language-'],
+:not(pre)>code[class*='language-'],
 pre[class*='language-'] {
   background: rgba(40, 41, 54, 1);
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-'] {
+:not(pre)>code[class*='language-'] {
   padding: 4px 7px;
   border-radius: 0.3em;
   white-space: normal;
@@ -1445,7 +1451,7 @@ pre.line-numbers {
   counter-reset: linenumber;
 }
 
-pre.line-numbers > code {
+pre.line-numbers>code {
   position: relative;
   white-space: inherit;
 }
@@ -1456,7 +1462,8 @@ pre.line-numbers > code {
   top: 0;
   font-size: 100%;
   left: -3.8em;
-  width: 3em; /* works for line-numbers below 1000 lines */
+  width: 3em;
+  /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
   border-right: 1px solid #999;
 
@@ -1466,13 +1473,13 @@ pre.line-numbers > code {
   user-select: none;
 }
 
-.line-numbers-rows > span {
+.line-numbers-rows>span {
   pointer-events: none;
   display: block;
   counter-increment: linenumber;
 }
 
-.line-numbers-rows > span:before {
+.line-numbers-rows>span:before {
   content: counter(linenumber);
   color: #999;
   display: block;

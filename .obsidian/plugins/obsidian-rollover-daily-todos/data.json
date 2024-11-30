@@ -1,0 +1,7 @@
+{
+  "templateHeading": "none",
+  "deleteOnComplete": false,
+  "removeEmptyTodos": false,
+  "rolloverChildren": false,
+  "rolloverOnFileCreate": false
+}

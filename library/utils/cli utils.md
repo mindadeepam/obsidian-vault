@@ -1,4 +1,3 @@
-# cli utils
 
 Since mac by default has zsh, these commands are mostly zsh specific. 
 
@@ -19,7 +18,7 @@ Since mac by default has zsh, these commands are mostly zsh specific.
 		4. **Extended globbing:** Zsh supports extended globbing, which provides additional pattern matching options beyond what Bash offers. For example, you can use the `(pattern)` syntax to match zero or more occurrences of a pattern. 
 		5. **Command line editing:** Zsh provides more advanced command line editing features, including better cursor movement, history navigation, and line editing shortcuts compared to Bash. It's important to note that while Zsh offers additional features, it strives to maintain compatibility with Bash, so most basic commands and scripts that work in Bash should also work in Zsh without issues. If you are already familiar with Bash and considering switching to Zsh, you will likely find that most of your existing knowledge and command usage will transfer seamlessly. However, you may also discover new features and capabilities in Zsh that can enhance your command line experience. - *other resources* - [https://apple.stackexchange.com/a/361957](https://apple.stackexchange.com/a/361957)
 
-### Basic commands (by usage)
+## Basic commands (by usage)
 
 - ***find out OS of system(zsh,bash)***
     The **uname** command writes the name of the operating system implementation to standard output.  When options are specified, strings representing one or more system characteristics are written to standard output. 
@@ -46,7 +45,6 @@ Since mac by default has zsh, these commands are mostly zsh specific.
 - ***get file size in dir***
 	`du -h --max-depth=2 path_to_dir`
 
-
 - **get linux distribution**
 	  **`lsb_release -a`
 
@@ -64,10 +62,10 @@ Since mac by default has zsh, these commands are mostly zsh specific.
 - find free space : `free -h`
 ---
 
-### Other commands
+## Other commands
 
 
-#### How to run a command in background, s.t. it keeps running even if we shut down the terminal
+### 1. How to run a command in background, s.t. it keeps running even if we shut down the terminal
 
 
 ```
@@ -131,3 +129,38 @@ Using `screen` allows you to keep commands running even if the terminal or SSH s
 
 
 
+
+
+
+
+### 2. gsutil
+
+- copy a dir recursively from gcp to local
+  `gsutil cp -r [OPTIONS] SOURCE DESTINATION`
+  add `-m` for parallel download
+  add `-P` for viewing progress
+  
+  eg: `gsutil -m cp -r -P  gs://fmt-ds-bucket/dev/grain_classification_model_data/imgs/wheat . 
+
+### 3. Launching a process from a running process; Differences Between os.execvp, subprocess.run, and os.system
+
+
+
+1. os.execvp:
+•	Behavior: Replaces the current process with the new one. The current Python process is terminated, and the uvicorn process takes its place. Control does not return to the Python script after execution.
+•	Use Case: Use when you want to completely replace the current Python process with the new program.
+•	Environment Variables: The new process inherits the current environment variables unless explicitly modified before calling os.execvp.
+2. subprocess.run:
+•	Behavior: Spawns a new child process to run the command. The parent Python process continues to exist and can wait for the child process to complete or perform other tasks simultaneously.
+•	Use Case: Use when you want to run a subprocess and still retain control of the current Python process.
+•	Environment Variables: By default, the subprocess inherits the current environment variables. You can customize them using the env parameter.
+3.	os.system:
+•	Behavior: Executes the command in a subshell. The current Python process remains active and waits for the shell command to complete.
+•	Use Case: Use for quick shell commands without needing advanced control over the process.
+•	Environment Variables: The command inherits the current environment variables unless altered before the os.system call.
+
+
+Recommendations:
+	•	Use os.execvp when you want to replace the Python script entirely with the new process.
+	•	Use subprocess.run for more robust control over the subprocess.
+	•	Use os.system for simple, quick shell execution tasks.

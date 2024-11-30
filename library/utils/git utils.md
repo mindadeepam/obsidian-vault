@@ -128,7 +128,10 @@ This command effectively undoes the last two commits but leaves your changes in 
 	 
 --- 
 
+### create a new branch 
 
+**usual**: `git checkout new_branch`
+**without commit history**: `git checkout --orphan new_branch`
 
 ## debugging
 
