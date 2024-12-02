@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f9b282decce3f460",
+        "id": "ad21b5bff1f731be",
         "type": "tabs",
         "children": [
           {
-            "id": "77059cca3f0e5896",
+            "id": "23357861800d6318",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "monitor specs for wfh.md",
+                "file": "library/utils/git utils.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "monitor specs for wfh"
+              "title": "git utils"
             }
           }
         ]
@@ -170,7 +170,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 467.5
+    "width": 467.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -184,10 +185,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "77059cca3f0e5896",
+  "active": "23357861800d6318",
   "lastOpenFiles": [
-    "library/utils/cli utils.md",
+    "library/notes/graphs/Graphs.md",
+    "library/notes/DSA/topic wise.md",
+    "library/notes/graphs",
     "monitor specs for wfh.md",
+    "library/utils/cli utils.md",
+    "library/misc/passwords.md",
     "library/notes/CS - python, etc/CORS.md",
     "library/notes/CS - python, etc/python packages.md",
     "library/utils/git utils.md",
@@ -202,16 +207,13 @@
     "2024-11-28 A Cold Winter.md",
     "variance of coeff.md",
     "library/utils/docker utils.md",
-    "library/misc/passwords.md",
     "personal tracker/get a job.md",
     "personal tracker/daily/16-11-2024.md",
     "library/notes/ssh gcp vm.md",
-    "library/notes/DSA/topic wise.md",
     "library/notes/DSA/general tips.md",
     "library/utils/python utils.md",
     "library/notes/CS - python, etc/heapq module.md",
     "library/notes/CS - python, etc/module comparison - queue vs heapq.md",
-    "<u> heapq module</u>.md",
     "<u> heapq module<",
     "library/misc",
     "library/journal",
@@ -232,7 +234,6 @@
     "library/notes/nlp",
     "library/notes/llms",
     "library/notes/DSA",
-    "library/notes/bash",
     "Untitled 1.canvas"
   ]
 }

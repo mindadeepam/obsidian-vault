@@ -133,6 +133,128 @@ This command effectively undoes the last two commits but leaves your changes in 
 **usual**: `git checkout new_branch`
 **without commit history**: `git checkout --orphan new_branch`
 
+
+### Git Workflow and pull strategy Guidelines 
+**Branching Workflow** 
+1. **Base Branch:**  
+• dev is the most current branch where all new feature branches originate.  
+2. **Feature Branch Workflow:**  
+• Developers create branches from dev, work on their feature, and push their branch to the remote (GitHub).  
+3. **Pull Requests:**  
+• Once a feature is complete, developers create a pull request to merge into dev.  
+4. **Production Deployment:**  
+• Files/folders are cherry-picked from dev to production for deployment.
+
+**Merge vs Rebase Strategies** 
+1. **Keeping Feature Branches Updated with** dev**:**  
+• **Use Rebase**:  
+• Rebase the feature branch onto dev to keep it current (git pull --rebase).  
+• This avoids unnecessary merge commits and ensures a linear history.  
+• **Important Note:** Only rebase private (unshared) feature branches to avoid rewriting public history.  
+2. **Merging Feature Branches into** dev**:**  
+• **Use Merge**:  
+• Merge feature branches into dev via pull requests to preserve the commit history.  
+• Use squash commits if there are too many small or redundant commits.  
+3. **Pushing to** production**:**  
+• **Use Cherry-Picking**:  
+• Cherry-pick specific commits or files from dev to production for controlled and selective deployment.
+
+**GitHub Configuration** 
+1. **Repository Settings:**  
+• Enable these options under the **Merge Button** section:  
+• **Rebase and Merge** for clean, linear history.  
+• **Squash and Merge** for single-commit merges (use sparingly).  
+• **Merge Commits** for context preservation during major integrations.  
+• Disable unnecessary merge methods if you want to enforce a specific workflow.  
+2. **Branch Protection Rules:**  
+• Require feature branches to be up-to-date with dev before merging.  
+• Enforce CI checks to ensure code quality and prevent broken merges.
+
+**Git Blame Considerations** 
+1. **Rebase:**  
+• Maintains clean history, but conflict resolutions during rebasing attribute those lines to the rebaser.  
+2. **Merge Commits:**  
+• Preserves all commit history and accurately reflects authorship for git blame.  
+3. **Squash Commits:**  
+• Combines all changes into one commit, attributing all changes to the squasher, which may obscure authorship in git blame.
+
+**Best Practices** 
+1. **During Development:**  
+• Use git pull --rebase to stay updated with dev.  
+• Regularly rebase private branches to avoid conflicts during pull requests.  
+2. **Merging to** dev**:**  
+• Use merge commits to preserve history.  
+• Avoid squashing large, multi-contributor feature branches if git blame accuracy is needed.  
+3. **Production Deployment:**  
+• Use cherry-picking for selective deployment of tested features.  
+4. **Collaboration and Automation:**  
+• Conduct code reviews during pull requests to ensure quality.  
+• Use GitHub Actions or CI to enforce rebasing and ensure branches are current before merging.By following these guidelines, you can balance a clean Git history, accurate git blame, and efficient collaboration.
+
+In summary  
+
+- When pulling changes from dev use rebase
+- When making a PR to dev user merge
+
+> one thing ive noted is if i push changes to my remote and then pull from dev then rebasing causes remote and local to diverge. this then requires manually merging possible conflicts in each commit, so ig we should always pull dev --rebase before we push any changes. (edited) 
+
+
+### how to squash commits
+
+Squashing commits involves combining multiple commits into a single one. This is typically done to clean up a commit history before merging branches. Here’s how to squash commits using Git:
+
+1. Interactive Rebase
+
+Use an interactive rebase to squash commits. For example, if you want to squash the last three commits:
+
+`git rebase -i HEAD~3`
+
+2. Mark Commits for Squashing
+
+This opens a text editor showing the commits:
+
+```
+pick abc123 Commit message 1
+pick def456 Commit message 2
+pick ghi789 Commit message 3
+```
+
+•	Replace pick with squash (or s) for the commits you want to squash into the previous one:
+
+```
+pick abc123 Commit message 1
+squash def456 Commit message 2
+squash ghi789 Commit message 3
+```
+
+3. Edit Commit Messages
+After saving, Git will prompt you to edit the combined commit message. You can edit it to summarize all changes or leave it as is:
+```
+# This is a combination of commits.
+# The first commit's message is:
+Commit message 1
+
+# The following commit messages will also be included:
+Commit message 2
+Commit message 3
+```
+
+Make your changes, then save and close the editor.
+
+4. Finish the Rebase
+Git applies the changes, combining the commits. If there are conflicts, Git will pause the rebase and allow you to resolve them. Once resolved, continue the rebase:
+
+`git rebase --continue`
+
+5. Push Changes
+If you’ve already pushed the commits to a remote repository, force push the branch to update it:
+
+`git push --force`
+
+Notes:
+- Squashing is best done on local branches or before merging into shared branches, as rewriting commit history affects collaborators.
+- Use git log or git reflog to verify the changes after squashing.
+
 ## debugging
 
 - Missing or invalid credentials
