@@ -241,7 +241,7 @@ Commit message 3
 
 Make your changes, then save and close the editor.
 
-4. Finish the Rebase
+4. Finish the Rebase (only If there are conflicts)
 Git applies the changes, combining the commits. If there are conflicts, Git will pause the rebase and allow you to resolve them. Once resolved, continue the rebase:
 
 `git rebase --continue`
@@ -255,7 +255,7 @@ Notes:
 - Squashing is best done on local branches or before merging into shared branches, as rewriting commit history affects collaborators.
 - Use git log or git reflog to verify the changes after squashing.
 
-## debugging
+### debugging
 
 - Missing or invalid credentials
 	```

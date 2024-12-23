@@ -137,21 +137,21 @@ Connectivity
 - Inbuilt Microphone
 
 
-
+dell se2725h 
 ## **Samsung ViewFinity S6 27-inch QHD Resolution Monitor with IPS Panel, Border-less Design, Height Adjustable Stand, VESA-compatibility, 75 Hz Refresh Rate, AMD Free Sync and Eye Comfort Technology (LS27B610EQWXXL) 17,699**
 
 General
 
-|   |   |
-|---|---|
-|Model Name|- LS27B610EQWXXL|
-|Color|- Black|
-|Display|- 60.96 cm (24 Inch) LED Display|
-|Panel Type|- IPS Panel|
-|Resolution|- 2560 x 1440 pixels|
-|Screen Resolution Type|- Full HD|
-|Sales Package|- 1 Monitor, Power Cable, HDMI Cable|
-|Screen Form Factor|- Flat|
+|                        |                                      |
+| ---------------------- | ------------------------------------ |
+| Model Name             | - LS27B610EQWXXL                     |
+| Color                  | - Black                              |
+| Display                | - 60.96 cm (24 Inch) LED Display     |
+| Panel Type             | - IPS Panel                          |
+| Resolution             | - 2560 x 1440 pixels                 |
+| Screen Resolution Type | - Full HD                            |
+| Sales Package          | - 1 Monitor, Power Cable, HDMI Cable |
+| Screen Form Factor     | - Flat                               |
 
 Display Features
 
@@ -229,3 +229,13 @@ Average
 16:9 Aspect Ratio
 Anti Glare
 AMD FreeSync
+
+
+## benq GW2790Q rupees 15000 
+https://www.benq.com/en-in/monitor/home/gw2790q/buy.html
+
+
+
+# References:
+- https://www.theverge.com/22877788/best-monitor-work-from-home-screen-choice-4k-qhd-refresh-rate-ultrawide
+- https://www.youtube.com/watch?v=qIl0uYa_5C0&t=169s

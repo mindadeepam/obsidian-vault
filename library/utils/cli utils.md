@@ -129,10 +129,6 @@ Using `screen` allows you to keep commands running even if the terminal or SSH s
 
 
 
-
-
-
-
 ### 2. gsutil
 
 - copy a dir recursively from gcp to local

@@ -8,7 +8,7 @@
 
 1. there must be linear relationship bw features and target.
 2. features are non-collinear
-3. erros must be normally distributed for a fixed X.
+3. errors must be normally distributed for a fixed X.
 4. variance and mean of errors/residuals is constant (Homoscedasticity).
 5. errors must be iid. 
    - Independent: Each data point is independent of the others, meaning that the occurrence of one data point doesn’t influence the others.
@@ -36,7 +36,8 @@ also see [this](https://people.duke.edu/~rnau/testing.htm) seemingly great read.
 - not really a problem as far as accuracy?
 
 ### how to solve for outliers?
-ie how to make model ignore outliers, ie decrease model capacity
+
+ie how to make model ignore outliers, ie decrease model capacityo
 
 - use MAE instead of MSE as loss function, as mae is more robust to outliers, mse incr4. ***????*** #not-really-sure
 - **Regularization** techniques. see [[#^regularization-helps-overfitting]]

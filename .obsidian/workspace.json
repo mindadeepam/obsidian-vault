@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ad21b5bff1f731be",
+        "id": "426def83a2101979",
         "type": "tabs",
         "children": [
           {
-            "id": "23357861800d6318",
+            "id": "566926084e5fb3cc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "library/utils/git utils.md",
+                "file": "personal tracker/2024-12/2024-12-23.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "git utils"
+              "title": "2024-12-23"
             }
           }
         ]
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 250.50484466552734
+    "width": 400.50484466552734
   },
   "right": {
     "id": "10048318e88c3884",
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "library/utils/python utils.md"
+                "file": "personal tracker/2024-12/2024-12-23.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of python utils"
+              "title": "Outline of 2024-12-23"
             }
           },
           {
@@ -166,11 +166,11 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 467.5,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -185,41 +185,47 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "23357861800d6318",
+  "active": "566926084e5fb3cc",
   "lastOpenFiles": [
-    "library/notes/graphs/Graphs.md",
+    "personal tracker/2024-12/2024-12-21.md",
+    "personal tracker/2024-12/2024-12-23.md",
+    "library/journal/2024-12-21 Action Items FR.md",
+    "library/journal/2024-11-17 Action-items for career development.md",
+    "Untitled.md",
+    "library/journal/2024-12-14 One good leg.md",
+    "library/journal/2024-11-22 Why only DSA?.md",
+    "Untitled.canvas",
+    "personal tracker/2024-12/2024-12-20.md",
+    "library/notes/DSA/binary search.md",
+    "personal tracker/2024-12/2024-12-19.md",
     "library/notes/DSA/topic wise.md",
+    "personal tracker/2023/weekly/template.md",
+    "personal tracker/2023/weekly/2023-W45.md",
+    "personal tracker/2023/weekly/2023-W42.md",
+    "personal tracker/2023/weekly/2023-W41.md",
+    "personal tracker/2023/weekly/2023-W40.md",
+    "personal tracker/2023/weekly/2023-W39.md",
+    "personal tracker/2023/weekly",
+    "personal tracker/2023/template.md",
+    "personal tracker/2023/2023-10-31.md",
+    "personal tracker/2023/2023-10-30.md",
+    "personal tracker/2023/2023-10-28.md",
+    "personal tracker/2023/2023-10-27.md",
+    "personal tracker/2023/2023-10-20.md",
+    "personal tracker/2023/2023-10-19.md",
+    "personal tracker/2023/2023-10-18.md",
+    "personal tracker/2023/2023-10-12.md",
+    "personal tracker/2023",
+    "personal tracker/2024-12",
+    "personal tracker/dec 2024",
+    "personal tracker/daily/temp.ipynb",
+    "media/Screenshot 2024-08-22 at 3.17.26 AM.png",
     "library/notes/graphs",
-    "monitor specs for wfh.md",
-    "library/utils/cli utils.md",
-    "library/misc/passwords.md",
-    "library/notes/CS - python, etc/CORS.md",
-    "library/notes/CS - python, etc/python packages.md",
-    "library/utils/git utils.md",
-    "library/utils/gcp utils.md",
-    "library/utils/random python functions.md",
-    "library/utils/common issues.md",
-    "library/notes/Data Science/trees.md",
-    "library/notes/Data Science/linear regression.md",
-    "library/notes/optimizers.md",
-    "2024-11-17 Action-items for career development.md",
-    "2024-11-22 Why only DSA?.md",
-    "2024-11-28 A Cold Winter.md",
-    "variance of coeff.md",
-    "library/utils/docker utils.md",
-    "personal tracker/get a job.md",
-    "personal tracker/daily/16-11-2024.md",
-    "library/notes/ssh gcp vm.md",
-    "library/notes/DSA/general tips.md",
-    "library/utils/python utils.md",
-    "library/notes/CS - python, etc/heapq module.md",
-    "library/notes/CS - python, etc/module comparison - queue vs heapq.md",
     "<u> heapq module<",
     "library/misc",
     "library/journal",
     "media/Transposed-Convolutional-2.png",
     "media/Transposed-Convolutional-1.png",
-    "media/Screenshot 2024-08-22 at 3.17.26 AM.png",
     "media/Screenshot 2024-08-21 at 2.30.09 AM.png",
     "media/Screenshot 2024-08-19 at 8.36.24 PM.png",
     "media/Screenshot 2024-08-19 at 6.16.42 PM.png",
@@ -228,12 +234,6 @@
     "media/Screenshot 2024-08-15 at 11.11.59 PM.png",
     "media/Screenshot 2024-08-15 at 11.10.47 PM.png",
     "media/Screen Recording 2024-07-27 at 9.22.24 PM.mov",
-    "Untitled.canvas",
-    "library/utils",
-    "library/notes/vision",
-    "library/notes/nlp",
-    "library/notes/llms",
-    "library/notes/DSA",
     "Untitled 1.canvas"
   ]
 }

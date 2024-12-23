@@ -1,12 +1,12 @@
 
-## Arrays and Strings
+# Arrays and Strings
 
 
 > [!note]
 > there is confusion in arr vs recursion where i tend to provide recursive solutions when not req.
 
 
-**--> Two Sum:**
+#### Two Sum:
 - [basic bool return for target and 2sum](https://www.geeksforgeeks.org/problems/key-pair5616/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card)
 - [check whether a+b == c+d in an arr for indices a,b,c,d](https://www.geeksforgeeks.org/problems/sum-equals-to-sum4006/1) : #hashmaps
 - https://www.geeksforgeeks.org/problems/pair-in-array-whose-sum-is-closest-to-x1124/1 :  #sliding-window
@@ -14,22 +14,21 @@
 
 also, sorted arrays allow ***2 pointer algorithms***!
 
-
-**--> Best Time to Buy and Sell Stock**
+#### Best Time to Buy and Sell Stock 
 - https://www.geeksforgeeks.org/problems/stock-buy-and-sell-1587115621/1 : #stack
 - https://www.geeksforgeeks.org/problems/buy-and-sell-a-share-at-most-twice/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
---> **Max sum path in two arrays**
+#### Max sum path in two arrays
 - https://www.geeksforgeeks.org/problems/max-sum-path-in-two-arrays/1 #array #again
 
 
---> **Product of Array Except Self**
+#### Product of Array Except Self
 
 
---> **Maximum Subarray:**
+#### Maximum Subarray:
 - https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
---> **Combination sum**
+#### Combination sum
 - comb sum 2: https://www.geeksforgeeks.org/problems/combination-sum-ii-1664263832/1 #medium #again 
 
 •	Contains Duplicate
@@ -66,7 +65,7 @@ also, sorted arrays allow ***2 pointer algorithms***!
 •	Intersection of Two Linked Lists
 •	Add Two Numbers
 
-## Trees and Graphs
+# Trees and Graphs
 
 •	Binary Tree Inorder Traversal
 •	Binary Tree Level Order Traversal
@@ -77,7 +76,7 @@ also, sorted arrays allow ***2 pointer algorithms***!
 •	Number of Islands
 •	Clone Graph
 
-## Dynamic Programming
+# Dynamic Programming
 
 •	Climbing Stairs
 •	House Robber
@@ -87,7 +86,7 @@ also, sorted arrays allow ***2 pointer algorithms***!
 •	Decode Ways
 •	0/1 Knapsack Problem
 
-## Sorting and Searching
+# Sorting and Searching
 
 •	Merge Intervals
 •	Search in Rotated Sorted Array
@@ -97,7 +96,7 @@ also, sorted arrays allow ***2 pointer algorithms***!
 •	Top K Frequent Elements
 - sort array of 0,1,2: https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1
 
-## Stacks and Queues
+# Stacks and Queues
 
 •	Valid Parentheses
 •	Implement Queue using Stacks
@@ -110,7 +109,7 @@ https://leetcode.com/problems/daily-temperatures/ #stack
 **---> Next Greater Element:**
 
 
-## Recursion and Backtracking
+# Recursion and Backtracking
 
 •	Permutations
 •	Subsets
@@ -119,7 +118,7 @@ https://leetcode.com/problems/daily-temperatures/ #stack
 •	Word Search
 •	Sudoku Solver
 
-## Bit Manipulation
+# Bit Manipulation
 
 --> **Nth number**:                *!!!!!*
 - arr containing numbers without a certain digit (say 9): https://www.geeksforgeeks.org/problems/nth-natural-number/1
@@ -131,20 +130,22 @@ https://leetcode.com/problems/daily-temperatures/ #stack
 •	Missing Number
 
 
-## Mathematics and Number Theory
+# Mathematics and Number Theory
 
 •	Sieve of Eratosthenes
 •	GCD and LCM of Two Numbers
 •	Fibonacci Sequence
 •	Happy Number
 
-## Greedy
+# Greedy
 
 •	Jump Game
 •	Meeting Rooms
 •	Gas Station
 
-## Miscellaneous
+- [Non-overlapping Intervals](https://www.geeksforgeeks.org/problems/non-overlapping-intervals/1): intereditng concept of sorting by the endtime which optimizes both locally and globally hence then greedy works.
+
+# Miscellaneous
 
 •	LRU Cache
 •	Implement Trie (Prefix Tree)

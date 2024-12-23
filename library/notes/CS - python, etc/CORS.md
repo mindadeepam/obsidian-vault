@@ -341,12 +341,7 @@ Only https://example.com can access this resource.
   
 
 • Wildcard:
-
-  
-
 Access-Control-Allow-Origin: *
-
-  
 
 Any origin can access this resource.
 

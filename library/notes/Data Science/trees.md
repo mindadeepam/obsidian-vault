@@ -41,20 +41,21 @@ Entropy measures the uncertainty or impurity in a dataset. In the context of dec
 
 eg if labels =[1,1,1,1,1,1], $H(S)$ = 0
 
-formula is $$H(S) = -\sum_{i=1}^{C} p_i*log(p_i)$$ where $p$ = fraction of label $C_i$ in data.
-
+formula is $$H(S) = -\sum_{i=1}^{C} p_i*log_2(p_i)$$ where $p_i$ = fraction of label $C_i$ in data.
+Ranges from 0 to $log_2(k)$, where k is the number of classes. base of logarithm is 2 bcuz info is in bits.
 
 ### what is gini-index?
 
 - **gini is a little more interpretable than entropy as there is no log scaling**
 - formula:  $G(S) = 1 - \sum_{i=1}^{C} p_i^2$ 
 
+Ranges from 0 to 1.
+
 ### what is information gain?
 
 we measure the best split of a node based on information gain (or loss if u look at it the other way). ie if by splitting on a feature $X_i$, entropy is reducing, that means model is explaining the variance of the data ...
 
 $$IG(S, A) = H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v)$$
-
 where:
 
 •	 $H(S)$  is the entropy of the original dataset  $S$ . parent node.
@@ -65,6 +66,11 @@ where:
 
 ### how to handle overfitting in trees?
 
+we can imagine trees being overfitted this way:
+There are too many splits done and hence we have much more leaf nodes than required. To generalize better we can 
+**prune trees**: merge some splits starting from the node, based on depth/num of items/entropy. This is a simple yet effective way to reduce variance. 
+
+**ensemble trees**: look at [[#ensembles]]
 
 
 ### how do regression trees work
@@ -72,6 +78,31 @@ where:
 
 # ensembles
 
+ensembling is a method eherer in we aggregate the results of many dumb learners (ie decesion trees, etc, models with high bias..?)
 ### why ensemble?
+
+- You can get a single decision tree to be very complex for sure. But it would have. a high bias because of the uniqueness of the nodes it makes. Using multiple diferent trees helps us control for that fator. 
+- Ensebling helps reduce variance. 
+- ensembling helps to introduce explainibility..?
 ### what is / why bagging?
+
+Bootstrapping means to approximate a population by measuirng many samples of the data, sampled with replacement from the population. 
+
+Bagging means *bootstrap aggregation*. Here different trees
+- sample features with replacement
+- sample data with replecament
+
+Each tree *independently* takes in a certain percent of the data and trains a model on it. Multiple such trees give their outputs which are then aggregated to return the final answer.
+
+**bagging helps reduce variance**. it is generally applied to a high variance algorithm like decision trees.
 ### what is / why boosting?
+
+In Boosting rather than independently training N learners, we use the errors of the $i_{th}$ model to train the ${i+1}_{th}$ model. specifically we increase the weight of the samples where errors were made by the previous tree. Boosting relies on adaptively focusing on harder instances to iteratively improve the ensemble’s accuracy.
+
+**boosting helps reduce the bias of the model.** ie increase complexity.
+
+### what is gradient boosting?
+
+In gradient boosting we are optimizing a loss fucntion. hence the target for the ith tree is the gradient of the loss fucntion at the predicitons of the prev tree. Then each trees predicitons are multiplied with a learning rate and summed to get the final prediciton.
+
+
