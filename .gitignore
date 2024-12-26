@@ -3,3 +3,4 @@
 *.tsv
 *.DS_Store
 *passwords.md
+*temp.ipynb

@@ -89,10 +89,11 @@ For next 1-2 months these will be my focus:
    *output*
    blog. can see it being a good one.
 2. python backend course<span style="color:rgb(185, 231, 136)">
-</span>3. dsa everyday, apply on weekends.
-4. want to do something outside of pure ml/dl. dont know what though!
+</span>
+3. dsa everyday, apply on weekends.
 
 Special mention (ye most prolly nai honge):
 1. torch karne ka man hai for DL. but need to find something for which torch will just be a tool. 
 2. Reinforcement learning
 3. DL library [this goes deep] implementation: ive no real motive here i dont train models enough to want to learn this right now.
+4. want to do something outside of pure ml/dl. dont know what though!
