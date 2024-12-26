@@ -1,11 +1,11 @@
 ## Welcome to my vault. I journal and write notes here.
 
 ## journal
-- [2024-11-17 Action-items for career development.md](./library/journal/2024-11-17_Action-items_for_career_development.md)
-- [2024-11-22 Why only DSA?.md](./library/journal/2024-11-22_Why_only_DSA?.md)
+- [2024-12-21 Action Items FR.md](./library/journal/2024-12-21_Action_Items_FR.md)
 - [2024-12-14 One good leg.md](./library/journal/2024-12-14_One_good_leg.md)
 - [2024-11-28 A Cold Winter.md](./library/journal/2024-11-28_A_Cold_Winter.md)
-- [2024-12-21 Action Items FR.md](./library/journal/2024-12-21_Action_Items_FR.md)
+- [2024-11-22 Why only DSA?.md](./library/journal/2024-11-22_Why_only_DSA?.md)
+- [2024-11-17 Action-items for career development.md](./library/journal/2024-11-17_Action-items_for_career_development.md)
 
 ## misc
 - [economics of a cook in gurgaon..md](./library/misc/economics_of_a_cook_in_gurgaon..md)

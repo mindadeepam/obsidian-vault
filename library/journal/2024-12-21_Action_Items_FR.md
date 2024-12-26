@@ -9,7 +9,7 @@
 3. Deep Learning / or something more advanced than (1) and (2)
 4. *whatever the fuck you want* (can be satisying 3 too)
 	 Example:
-	- implement stuff from basics, whatever u want to learn more:
+	- implement stuff from basics, whatever u want to learn more.
 	- wanna know pytorch in and out? write a blog on how it works. 
 	- wanna learn RF, learn something till u can blog and provde some value. 
 	- wanna know matrix algorithms from scratch? implement numpy or pytorch from scratch.
@@ -66,7 +66,7 @@ better way to get into papers and stuff is to reach out to research orgs / colle
 
 - timeline: 2-3 months
 - PMCPP or smthng book and practise
-- courses exist: [gpu mode channel](https://www.youtube.com/@GPUMODE/videos)] and discord. etc
+- courses exist: [gpu mode channel](https://www.youtube.com/@GPUMODE/videos) and discord. etc
  
  
 <span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
@@ -74,11 +74,60 @@ better way to get into papers and stuff is to reach out to research orgs / colle
 - instantly useful for me in ML(gpu).
 - differentiator in interviews.
 - can branch off to gpu architectures etc..
+- C padna hoga i think isme
 
 <span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
 - none really
+- C padna hoga i think isme
 
+### 2. Reinforcement Learning
 
+- huggingface course for starters.. need some more material. on this.
+- 
+
+<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
+- differentiator in interviews
+- interesting something different and tangentially relevant.
+
+<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
+- seems not instantly useful/applicable.
+
+### 3. deep learning 102
+
+- read torch docs extensively.
+- 
+
+<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
+- useful instantly
+
+<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
+- output kya hoga iska??: 
+	- a auto-grad/DL library from scratch
+	- torch for not dummies
+
+### 4. Diffusion and generative vision
+
+- ?
+
+<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
+- cool and different
+
+<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
+- kya karega iska bhai
+
+### 5. LLMs
+
+- yahi chal rha hai aajkal.
+- almost a need at this point.
+- transformers from scratch, each module in detail explanation, 
+
+<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
+- very relevant for jobs etc.
+- useful instantly.
+
+<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
+- very broad
+- isme kya alag karoge
 # Next Month Action Items
 
 For next 1-2 months these will be my focus:
