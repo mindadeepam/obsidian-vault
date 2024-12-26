@@ -1,5 +1,16 @@
 #cp #DSA 
 
+### DSA time comlexity required
+
+wrt array sizes of inputs:
+
+- If n ≤ 1000: O(n^2) or better
+- If n ≤ 210^5: O(n log n) or better
+- If n ≤ 10^6: O(n) or better
+- If n ≤ 10^9: O(log n) or better
+
+###
+
 - Most concepts used are basic and dont need you to go out of your way. 
 	- for example you are iterating over 2 arrays and are getting a TLE. current T=N^2. can we use hashmaps to improve read speed?
 	- another example, is the [tree removal queestion](https://www.codechef.com/problems/TREEREMOVAL?tab=statement). whenver a question comes see which datastructures are obviously used and what properties/algorithms relted to thst structure and help you 
