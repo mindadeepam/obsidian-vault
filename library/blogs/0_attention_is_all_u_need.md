@@ -66,7 +66,7 @@ $$
 
 
 <center>
-     <img src="rnn_enc_dec.png" alt="rnn_enc_dec" width="300" height="300" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/rnn_enc_dec.png" alt="rnn_enc_dec" width="300" height="300" />
      <figcaption>Figure 1: RNN encoder decoder model.</figcaption>
 </center>  
 
@@ -82,7 +82,7 @@ This looks like a solid foundation for end to end sequence modelling, it was jus
 Bahadanu et al. in 2014 [8] identified the context vector as a bottleneck and introduced the concept of **attention** to the seq2seq model.
 
 <center>
-     <img src="lil-weng-attantion-fig-4.png" alt="seq2seq" width="500" height="300" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/lil-weng-attantion-fig-4.png" alt="seq2seq" width="500" height="300" />
      <figcaption>Figure 2: Seq2Seq model with attention.</figcaption>
  </center>
 
@@ -107,11 +107,18 @@ The alignment model $a$ scores how well the input at position $j$ matches the ou
 As expected, the model with attention outperforms the model without attention especially for longer sentences. (see fig 3) 
 
 <center>
-     <img src="learning-to-jointly-align-and-translate-fig-2.png" alt="performance comparison of models with and without attention" width="600" height="300" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/learning-to-jointly-align-and-translate-fig-2.png" alt="performance comparison of models with and without attention" width="600" height="300" />
      <figcaption>Figure 3: Performance comparison of models with and without attention.[8]</figcaption>
 </center>
 <br>
 
+
+## But…
+
+- Sequential computation inhibits parallelization.
+- No explicit modeling of long and short range dependencies.
+- We want to model hierarchy.
+- RNNs (w/ sequence-aligned states) seem wasteful!
 
 ## Transformers!
 
@@ -198,7 +205,7 @@ $$
 Syntactically what matters is that a array of numbers now becomes a matrix of vectors since each token is mapped to a vector. 
 
 <center>
-     <img src="illustrated-transformers-fig-12312.png" alt="embedding" width="600" height="100" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/illustrated-transformers-fig-12312.png" alt="embedding" width="600" height="100" />
      <figcaption>Each word is embedded into a vector of size 512.</figcaption>
 </center>  
 
@@ -213,7 +220,7 @@ So now we have as input a matrix of shape $L \times d_{model}$ that represents t
 The abstraction that is common to all the encoders blocks is that they receive a list of vectors each of the size $L$. In the bottom encoder that would be the word embeddings, but in other encoders, it would be the output of the encoder that’s directly below it. 
 
 <center>
-     <img src="attention-is-all-u-need-encoder.png" alt="encoder" width="200" height="300" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/attention-is-all-u-need-encoder.png" alt="encoder" width="200" height="300" />
      <figcaption>An Encoder block</figcaption>
 </center>  
 
@@ -265,7 +272,7 @@ k_i = W_k \mathbb{x_i} \quad q_i = W_q \mathbb{x_i} \quad v_i = W_v \mathbb{x_i}
 $$
 
 <center>
-     <img src="illustrated-transformer-fig-21432.png" alt="encoder" width="600" height="350" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/illustrated-transformer-fig-21432.png" alt="encoder" width="600" height="350" />
      <figcaption>Fig: token level view of self attention. Each vector represents one token in the input sequence.</figcaption>
 </center>  
 
@@ -303,7 +310,7 @@ $$
 where $Y \in \mathbb{R}^{L \times d_{model}}$ ie same shape as the input.
 
 <center>
-     <img src="illustrated-transformer-fig-6543.png" alt="encoder" width="300" height="350" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/illustrated-transformer-fig-6543.png" alt="encoder" width="300" height="350" />
      <figcaption>Fig: Matrix view of self attention. Every row in the X matrix corresponds to a word in the input sentence.</figcaption>
 </center>  
 
@@ -330,14 +337,14 @@ where $+$ is the elementwise product.
 
 This diagram should now be very easy to understand. (Masking will be covered later in the decoder section)
 <center>
-     <img src="attention-is-all-u-need-sa.png" alt="encoder" width="200" height="230" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/attention-is-all-u-need-sa.png" alt="encoder" width="200" height="230" />
      <figcaption>Fig: Scaled Dot product attention</figcaption>
 </center>  
 
-## Multi-headed Attention
+## Multi-headed Attention (MHA)
 
 <center>
-     <img src="attention-is-all-u-need-mha.png" alt="encoder" width="200" height="300" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/attention-is-all-u-need-mha.png" alt="encoder" width="200" height="300" />
      <figcaption>Fig: Multi-headed attention</figcaption>
 </center>  
 
@@ -378,84 +385,121 @@ $W_o$ is the output projection matrix. It allows some computation after concaten
 Looking at everything in the self attention block, we have:
 
 <center>
-     <img src="illustrated-transformer-fig-encoder-full-detailed.png" alt="encoder" width="700" height="400" />
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/illustrated-transformer-fig-encoder-full-detailed.png" alt="encoder" width="700" height="400" />
      <figcaption>Fig: Expanded view of the self attention block</figcaption>
 </center>  
 
 
+## Residual Connections
 
+Residual connections are used to mitigate vanishing gradients in deep neural networks. They were first introduced in [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385) and have since been used in almost all deep neural networks.
 
-### Layer Normalization
-
-In CNNs we employ batch normalization to normalize the activations of each layer across the batch dimension. In transformers we use layer normalization instead.
-In batch normalization, for a batch of shape $B, H, W, C$, the mean $\mu$ and standard deviation $\sigma$ are calculated as follows:
+Mathematically, a residual connection is a shortcut connection that allows the network to bypass some layers and directly influence the output of other layers. This is done by adding the output of a layer to the input of the same layer.
 
 $$
-\mu = \frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} x_{b,h,w,c} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} (x_{b,h,w,c} - \mu)^2}
+y = x + f(x)
 $$
 
-Note that the mean and standard deviation are calculated across the $H$, $W$, and $C$ dimensions for each batch element $b$.
+where $x$ is the input to the layer, and $f(x)$ is the output of the layer.  
+In transformers, 
+$$
+\text{MHA}(x) = x + \text{MHA}(x)
+$$
 
-### Residual Connections
+## Layer Normalization
 
-### Point-wise Feed-Forward Network
+In CNNs we employ batch normalization to normalize the activations of each layer across the batch dimension. In batch normalization, for a batch of shape $B, H, W, C$, the mean $\mu$ and standard deviation $\sigma$ are calculated as follows:
+
+$$
+\mu = \frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} x_{b,h,w} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} (x_{b,h,w} - \mu)^2}
+$$
+
+$$ 
+y_{b,h,w,c} = \gamma \frac{x_{b,h,w,c} - \mu}{\sigma} + \beta
+$$
+
+So during training in CNNs, we take mean and std across the batch dimension (its either cross features or across samples, bathc denotes samples. In both cases we also take mean and std across the spatial dimensions(H,W or seq_len)) then subtract each channel value by the mean and divide by the std. This is done for each channel in the batch. To let the model still be able to model complex patterns, we add learnable parameters $\gamma$ and $\beta$ to the normalized values.
+During inference, we use the average mean and std calculated during training to normalize the activations.
+
+Note that the mean and standard deviation are calculated across the $H$, $W$, and $B$ dimensions for each channel $C$.
+But this would hinder parallization in transformers. So instead we use layer normalization. In layer normalization, we take mean and std across the feature dimension (ie $H,W,C$ or $L,d_{model}$) then subtract each channel value by the mean and divide by the std.
+$$
+\mu = \frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} x_{h,w,c} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} (x_{h,w,c} - \mu)^2}
+$$
+
+Similarly in transformers, we take mean and std across the feature dimension (ie $L,d_{model}$) then subtract each value by the mean and divide by the std.
+$$
+\mu = \frac{1}{L \cdot d_{model}} \sum_{l=1}^{L}\sum_{d=1}^{d_{model}} x_{l,d} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{L \cdot d_{model}} \sum_{l=1}^{L} \sum_{d=1}^{d_{model}} (x_{l,d} - \mu)^2}
+$$
+
+$$
+y_{l,d} = \gamma \frac{x_{l,d} - \mu}{\sigma} + \beta
+$$
+
+<center>
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/batch-norm-layer-norm.png" alt="encoder" width="400" height="200" />
+     <figcaption>Fig: Batch norm vs layer norm</figcaption>
+</center>  
+
+
+- [Batch normalization](https://arxiv.org/pdf/1502.03167) and [layer normalization](https://arxiv.org/pdf/1607.06450) both help in stabilizing the training process. This is because without normalization, the activations can become too large or too small, and variance between batches (internal covariate shift) or samples can cause the network to become unstable and difficult to train. Normalization also acts as a regularizer and helps in preventing overfitting. 
+- **Learnable Parameters:** Both γ and β are *learnable* parameters. This means that the network can adjust them during training through backpropagation, just like the weights and biases of the layers.
+- **Undoing Normalization:** In the extreme case, the network can learn to set γ to the standard deviation of the original activations and β to the mean of the original activations. This would effectively "undo" the normalization and restore the original distribution if that's what's best for the task.  
+
+Here is an an excellent and intuitive explanation from [Pramod Goyal's excellent blog on transformers](https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block)
+
+<center>
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/pramod-transformers-sa-intuition.png" alt="encoder" width="600" height="500" />
+     <figcaption>Fig: Self attention exlained, Transformers Laid Out - Pramod Goyal</figcaption>
+</center>    
+
+**As demonstrated self-attention is a linear transformation.**
+
+Now we have the final equation for the first half of the encoder block.
+
+$$
+\text{MHA}(x) = \text{LN}(\text{MHA}(x) + x)
+$$
 
 ---
 
+## WIP
 
-### Dec block
+- **Point-wise Feed-Forward Network**
+
+- **Dec block**
     
-    recurrence
-    masked self attention
-    cross attention
-    diagrams
+  - recurrence
+  - masked self attention
+  - cross attention
+  - diagrams
 
-### Positional Encoding
-
-
+- **Positional Encoding**
 
 
+- **Qs:**
+  - why did we remove recurrance?
+  - what is attention?
+  - one token, sentence and batch visualizations.
+  - what is self attention? 
+  - why multiplicative attention instead of additive?
+  - why kqv? 
+  - why multihead?
+  - Here we begin to see one key property of the Transformer, which is that the word in each position flows through its own path in the encoder. There are dependencies between these paths in the self-attention layer. The feed-forward layer does not have those dependencies, however, and thus the various paths can be executed in parallel while flowing through the feed-forward layer ?????????/ 
+  - code implementation in beginning or end? code does make it ugly fo-sho.
 
-
-Qs:
-- why did we remove recurrance?
-- what is attention?
-- one token, sentence and batch visualizations.
-- what is self attention? 
-- why multiplicative attention instead of additive?
-- why kqv? 
-- why multihead?
-- Here we begin to see one key property of the Transformer, which is that the word in each position flows through its own path in the encoder. There are dependencies between these paths in the self-attention layer. The feed-forward layer does not have those dependencies, however, and thus the various paths can be executed in parallel while flowing through the feed-forward layer ?????????/
-
-
-code implementation in beginning or end? code does make it ugly fo-sho.
-
-
-```python
-# def ascii_tokenize(text):
-#     # Convert the string to bytes to handle extended ASCII
-#     byte_string = text.encode('latin-1')  # latin-1 maps directly to ASCII 0-255
-    
-#     # Convert each byte to its integer value
-#     tokens = [int(byte) for byte in byte_string]
-    
-#     # Create a readable representation
-#     readable = [(token, chr(token) if token < 128 else f'<{token}>') for token in tokens]
-#     return tokens, readable
-
-# text = "je suis étudiant"
-# tokens, readable = ascii_tokenize(text)
-
-# print(f"\nReadable format: {[b for a,b in readable]}")
-# print("Tokenized input:", tokens)
-
-```
+- **[13]**
+  - According to Vaswani himself [13], the main advantage of the transformer architecture is that it is parallelizable. hence it makes training faster (attention paper reported 3* faster than similar sized RNN based models, this is because the attention is a simple linear operation. this makes it favourable to train via backprop/SGD).
+  - he also says that if diff heads focused locally (based on posituib, like convolution does) instead of globally (globally but in lower dims) and if theere were many heads it would be like a convolution.
 
 ## References 
+<small>
 📕: must read  
 📘: good to read  
 📓: if time permits  
-📙: just noting for use if ever  
+📙: just noting for use, if ever  
+</small>
+
 
 [1] [A Neural Probabilistic Language Model - Bengio et al, 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf) 📕  
 [2] [Standford Speech and Language Processing 3rd edition, 2024](https://web.stanford.edu/~jurafsky/slp3/3.pdf) 📘  
@@ -468,10 +512,11 @@ code implementation in beginning or end? code does make it ugly fo-sho.
 [9] [On the Properties of Neural Machine Translation: Encoder–Decoder Approaches, Cho et al, 2014b](https://arxiv.org/pdf/1409.1259) 📘   
 [10] [Attention Is All You Need, Vaswani et al, 2017](https://arxiv.org/pdf/1706.03762) 📕  
 [11] [Attention? Attention! - Lilian Weng, 2018](https://lilianweng.github.io/posts/2018-06-24-attention/) 📘  
-[12] [The Illustrated Transformer - Jay Alammar, 2018](https://jalammar.github.io/illustrated-transformer/) 📕  
-
+[12] [The Illustrated Transformer - Jay Alammar, 2018](https://jalammar.github.io/illustrated-transformer/) 📕   
+[13] [Stanford CS224N: NLP with Deep Learning | Winter 2019 | Lecture 14 – Transformers and Self-Attention, Vaswani](https://www.youtube.com/watch?v=5vcj8kSwBCY) 📕  
 
 ---
+Other resources:
 
 - https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block   
 - https://nlp.seas.harvard.edu/annotated-transformer/ code-led explanation
@@ -480,7 +525,16 @@ code implementation in beginning or end? code does make it ugly fo-sho.
 - [Attention? Attention! - Lilian Weng, 2018](https://lilianweng.github.io/posts/2018-06-24-attention/) : for a more indepth read on Attention mechanism and its usage elsewhere.
 - [The transformer family - lilian weng, 2020](https://lilianweng.github.io/posts/2020-04-07-the-transformer-family/): explains transformers and further advancements on the architecture.
 - https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/
+- https://mehta-rohan.com/writings/blog_posts/attention.html
+- https://www.youtube.com/watch?v=5vcj8kSwBCY: stanford guest lecture of transformers by vaswani himself
+
+
+
 ---
+
+<details>
+<summary>
+These are some resoruces I picked on the way, to read later</summary>
 
 [ ] [H. Schwenk. Continuous space language models. Computer Speech and Language, vol. 21, 2007](https://publi.limsi.fr/RS2005/chm/tlp/tlp11/) 📘
 [ ] [T. Mikolov, A. Deoras, S. Kombrink, L. Burget, J. Cernock ˇ y. Empirical Evaluation and Com- ´
@@ -488,9 +542,7 @@ bination of Advanced Language Modeling Techniques, In: Proceedings of Interspeec
 [ ] Attention, Attention! - Lilian Weng, [blog](https://lilianweng.github.io/posts/2018-06-24-attention/) 📘  
 [ ] [Effective Approaches to Attention-based Neural Machine Translation, Luong et al, 2015](https://arxiv.org/pdf/1508.04025) 📘  
 
-<details>
-<summary>
-These are some resoruces I picked on the way, to read later</summary>
+
 
 - [Parallel Distributed Processing, Volume 1: Explorations in the Microstructure of Cognition: Foundations](https://direct.mit.edu/books/monograph/4424/Parallel-Distributed-Processing-Volume) (book that contained [3] hinton paper.) read the book if time allows, not necessary. 📓
 - attention origins: [Generating Sequences With Recurrent Neural Networks, 2014](https://arxiv.org/pdf/1308.0850) -> [Neural Machine Translation by Jointly Learning to Align and Translate, 2014](https://arxiv.org/pdf/1409.0473) -> [Attention is all you need, 2017](https://arxiv.org/pdf/1706.03762.pdf)
@@ -498,19 +550,21 @@ These are some resoruces I picked on the way, to read later</summary>
 
 **neural machine translation**
 
-## Appendix
+<details><summary>Appendix</summary>
 
 [1] Language model probabilities are always stored and computed in log space as log probabilities. This is because probabilities are (by definition) log probabilities less than or equal to 1, and so the more probabilities we multiply together, the smaller the product becomes. Multiplying enough n-grams together would result in numerical underflow. Adding in log space is equivalent to multiplying in linear space, so we combine log probabilities by adding them. By adding log probabilities instead of multiplying probabilities, we get results that are not as small. We do all computation and storage in log space, and just convert back into probabilities if we need to report probabilities at the end by taking the exp of the logprob:
 $$p_1 \times p_2 \times p_3 \times p_4 = \exp(\log p_1 + \log p_2 + \log p_3 + \log p_4)$$
 
-[2]
 
 
- Q. give me a detailed long report of main papers in nlp leading upto attention/gpt/bert, each paper u mention must be a significant milestone in nlp that  advanced the field in some way.
-<!--
-Okay, here is a detailed report tracing the significant milestones in NLP leading up to attention mechanisms, GPT, and BERT. This report focuses on key papers that advanced the field, particularly in the context of neural network-based approaches.
 
-### Early Foundations (Pre-2000s)
+<details>
+<summary>[2]</summary>
+Q. chatgpt give me a detailed long report of main papers in nlp leading upto attention/gpt/bert, each paper u mention must be a significant milestone in nlp that  advanced the field in some way.
+
+-> Okay, here is a detailed report tracing the significant milestones in NLP leading up to attention mechanisms, GPT, and BERT. This report focuses on key papers that advanced the field, particularly in the context of neural network-based approaches.
+
+##### Early Foundations (Pre-2000s)
 
 Before the neural network revolution, NLP relied heavily on:
 
@@ -520,7 +574,7 @@ Before the neural network revolution, NLP relied heavily on:
 
 These methods, while effective to some extent, struggled with the nuances and complexities of human language.
 
-### The Rise of Neural Networks in NLP (2000s - 2013)
+##### The Rise of Neural Networks in NLP (2000s - 2013)
 
 **1. A Neural Probabilistic Language Model (2003) - Bengio et al.**
 
@@ -558,7 +612,7 @@ These methods, while effective to some extent, struggled with the nuances and co
     *   Released pre-trained word embeddings that became widely used in the NLP community.
 *   **Impact:** Word2Vec significantly advanced the field by providing a fast and effective way to learn high-quality word embeddings, which became a standard component in many NLP systems.
 
-### The Era of Sequence-to-Sequence Models and Attention (2014-2017)
+##### The Era of Sequence-to-Sequence Models and Attention (2014-2017)
 
 **5. Sequence to Sequence Learning with Neural Networks (2014) - Sutskever et al.**
 
@@ -596,7 +650,7 @@ These methods, while effective to some extent, struggled with the nuances and co
     *   Achieved state-of-the-art results in machine translation and other NLP tasks.
 *   **Impact:** This was a revolutionary paper that transformed the field of NLP. The Transformer architecture became the dominant paradigm for many NLP tasks due to its efficiency, parallelizability, and ability to capture long-range dependencies.
 
-### The Rise of Pre-trained Language Models (2018-Present)
+##### The Rise of Pre-trained Language Models (2018-Present)
 
 **9. Improving Language Understanding by Generative Pre-Training (GPT) (2018) - Radford et al.**
 
@@ -615,13 +669,20 @@ These methods, while effective to some extent, struggled with the nuances and co
     *   Achieved state-of-the-art results on a wide range of NLP tasks, surpassing previous methods by a significant margin.
 *   **Impact:** BERT revolutionized the field of NLP by demonstrating the effectiveness of bidirectional pre-training. It became the dominant approach for many NLP tasks and set a new standard for performance.
 
-### Conclusion
+##### Conclusion
 
 The journey from early rule-based systems to today's powerful pre-trained language models like GPT and BERT has been marked by a series of significant breakthroughs. The introduction of neural networks, word embeddings, sequence-to-sequence models, and the attention mechanism were crucial steps that paved the way for the Transformer architecture and the era of pre-trained language models. These advancements have dramatically improved the performance of NLP systems and have opened up new possibilities for understanding and generating human language. The field continues to evolve rapidly, with ongoing research exploring new architectures, pre-training objectives, and applications of these powerful models.
- -->
 
+</details>
 
+[3]
+Cimputational complexity:
 
+Self-Attention: O(length² · dim)  
+NN (LSTM): O(length · dim²)  
+Convolution: O(length · dim² · kernel_width)    
+
+<details><summary>[4]</summary>
 The magic of information passing between tokens in self-attention lies in the attention mechanism itself. It allows each token to "attend" to every other token in the sequence and incorporate information from them into its own representation. Here's a step-by-step breakdown:
 
 1. Queries, Keys, and Values:
@@ -670,6 +731,9 @@ The "Attention is All You Need" paper takes this a step further with multi-head 
 In essence, self-attention allows each token to dynamically gather information from all other tokens in the sequence, weighted by their relevance. This mechanism enables the Transformer to capture long-range dependencies and build context-aware representations of each token, which is crucial for understanding the meaning of the sequence as a whole.
 
 
-$$
-\mathbf{a} + \mathbf{b} = \begin{bmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{bmatrix} = \begin{bmatrix} a_1 + b_1 \\ a_2 + b_2 \\ \vdots \\ a_n + b_n \end{bmatrix}
-$$
+
+</details>
+
+</details>
+
+
