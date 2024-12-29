@@ -1,18 +1,10 @@
 
 
 > [!note] Remember to aim high, do something cool and have small achievalble goals
+<br>
+# CAREER PLANS
 
-# Learning
-
-1. ML/DS Basics.. theory.. (for interview)
-2. DSA (for interview)
-3. Deep Learning / or something more advanced than (1) and (2)
-4. *whatever the fuck you want* (can be satisying 3 too)
-	 Example:
-	- implement stuff from basics, whatever u want to learn more.
-	- wanna know pytorch in and out? write a blog on how it works. 
-	- wanna learn RF, learn something till u can blog and provde some value. 
-	- wanna know matrix algorithms from scratch? implement numpy or pytorch from scratch.
+**Do whatever the fuck you want but do stuff!!**
 
 # Next Job
 
@@ -34,15 +26,15 @@ datascience heavy: statistics heavy / analytics comapnies..EY, tiger / finance?.
 product shipping, usually DL?: *exciting* / *growth* / smallai, sarvam,../ same skills can get me in big tech? *FAANG*
 *FAANG*: dsa, dsa, dsa. fundamentals, research..
 
-# Prepare for intreview
+## Prepare for intreview
 
 - dsa
 - apply, assess companies and oppurtunities. This guides long term vision and is very important
+<br>
 
 # Long term vision 
 
 ## MAKE shit! be a creator!: output
-
 
 ## Contribute to opensource: output 
 could be a way to learn any topic enough and then just contribute.
@@ -57,92 +49,32 @@ strentghen core CS/ML/DL learn pytorch and stuff a little more follow some cours
 #### Document your journey
 this will help motivate learning.
 ## Get in academic research?
-better way to get into papers and stuff is to reach out to research orgs / colleges and get in academic research. this bumps profile a lot reach out to AI4bharat & stuff..
-
+better way to get into papers and stuff is to reach out to research orgs / colleges and get in academic research. this bumps profile a lot reach out to AI4bharat & stuff..o
+<br>
 
 # Possible Topics to explore
+| Topic                                              | Details                                                                                                                                                          | Pros                                                                                                                                                          | Cons                                                                                            |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **1. CUDA programming & kernel optimizations**     | - timeline: 2-3 months <br>- PMCPP or smthng book and practise <br>- courses exist: [gpu mode channel](https://www.youtube.com/@GPUMODE/videos) and discord. etc | - excellent hard skill to have. <br>- instantly useful for me in ML(gpu). <br>- differentiator in interviews. <br>- can branch off to gpu architectures etc.. | - none really <br> - C padna hoga i think isme                                                  |
+| **2. Reinforcement Learning**                      | - huggingface course for starters.. need some more material. on this.                                                                                            | - differentiator in interviews <br>- interesting something different and tangentially relevant.                                                               | - seems not instantly useful/applicable.                                                        |
+| **3. deep learning 102**                           | - read torch docs extensively.                                                                                                                                   | - useful instantly                                                                                                                                            | - output kya hoga iska??: <br>- a auto-grad/DL library from scratch <br>- torch for not dummies |
+| **4. Diffusion and generative vision**             | - ?                                                                                                                                                              | - cool and different                                                                                                                                          | - kya karega iska bhai                                                                          |
+| **5. LLMs**                                        | - yahi chal rha hai aajkal. <br>- almost a need at this point. <br>- transformers from scratch, each module in detail explanation,                               | - very relevant for jobs etc. <br>- useful instantly.                                                                                                         | - very broad <br>- isme kya alag karoge                                                         |
+| **6. Pyspark and other data-eng skills**           | - sounds boring but is very useful.                                                                                                                              | - very relevant for jobs etc. <br>- useful kind of instantly.                                                                                                 | - not particulary wanting to go to dataengineering side.                                        |
+| **7. want to do something outside of pure ml/dl.** | - some basic app/site or something like infinity-music. <br>- something someone can use/visit/enjoy.,                                                            | - useful for a manager type ya CTO types role, looks distant.                                                                                                 | - dont know what though!<br>                                                                    |
+| **8. distributed training and stuff**              | - very relevant in todays time but for large Corps only                                                                                                          |                                                                                                                                                               | cant really implement theory samajh sakte hai bas                                               |
+|                                                    |                                                                                                                                                                  |                                                                                                                                                               |                                                                                                 |
+<br>
 
-### 1. CUDA programming & kernel optimizations: 
-
-- timeline: 2-3 months
-- PMCPP or smthng book and practise
-- courses exist: [gpu mode channel](https://www.youtube.com/@GPUMODE/videos) and discord. etc
- 
- 
-<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
-- excellent hard skill to have.
-- instantly useful for me in ML(gpu).
-- differentiator in interviews.
-- can branch off to gpu architectures etc..
-- C padna hoga i think isme
-
-<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
-- none really
-- C padna hoga i think isme
-
-### 2. Reinforcement Learning
-
-- huggingface course for starters.. need some more material. on this.
-- 
-
-<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
-- differentiator in interviews
-- interesting something different and tangentially relevant.
-
-<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
-- seems not instantly useful/applicable.
-
-### 3. deep learning 102
-
-- read torch docs extensively.
-- 
-
-<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
-- useful instantly
-
-<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
-- output kya hoga iska??: 
-	- a auto-grad/DL library from scratch
-	- torch for not dummies
-
-### 4. Diffusion and generative vision
-
-- ?
-
-<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
-- cool and different
-
-<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
-- kya karega iska bhai
-
-### 5. LLMs
-
-- yahi chal rha hai aajkal.
-- almost a need at this point.
-- transformers from scratch, each module in detail explanation, 
-
-<span style="background-color: green; color: white; padding: 2px 5px; border-radius: 3px;">Pros</span>
-- very relevant for jobs etc.
-- useful instantly.
-
-<span style="background-color: red; color: white; padding: 2px 5px; border-radius: 3px;">Cons</span>
-- very broad
-- isme kya alag karoge
 # Next Month Action Items
 
 For next 1-2 months these will be my focus:
 
-1. optimization: 
-   *input*
-   can learn to optimize runtime of various models(cnns/1b llms/..) for same task performace, metrics wise. lot of scope to learn many things.
-   *output*
-   blog. can see it being a good one.
-2. python backend course<span style="color:rgb(185, 231, 136)">
+1. Have to begin with deep learning 102 and LLMs. 
+   def a blog. how will u make it different??
+   day 1: readupto and document attetnion is all u need.
+   day 2: 
+   
+1. python backend course<span style="color:rgb(185, 231, 136)">
 </span>
 3. dsa everyday, apply on weekends.
-
-Special mention (ye most prolly nai honge):
-1. torch karne ka man hai for DL. but need to find something for which torch will just be a tool. 
-2. Reinforcement learning
-3. DL library [this goes deep] implementation: ive no real motive here i dont train models enough to want to learn this right now.
-4. want to do something outside of pure ml/dl. dont know what though!

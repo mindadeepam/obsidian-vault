@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "2024-12-21_Action_Items_FR"
             }
+          },
+          {
+            "id": "ff4b1c4ef96ce6b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "library/notes/DL/Batch_normalization.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Batch_normalization"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -77,8 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 322.50484466552734,
-    "collapsed": true
+    "width": 366.50484466552734
   },
   "right": {
     "id": "10048318e88c3884",
@@ -186,10 +200,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "49a412562fe2eaf4",
+  "active": "ff4b1c4ef96ce6b9",
   "lastOpenFiles": [
-    "library/journal/2024-11-17_Action-items_for_career_development.md",
+    "library/blogs/0_attention_is_all_u_need.md",
+    "library/blogs",
+    "library/notes/vision/Convolutions.md",
+    "library/notes/vision/CNNs.md",
+    "library/notes/DL/Batch_normalization.md",
+    "blog-ideas.md",
     "library/journal/2024-12-21_Action_Items_FR.md",
+    "index.md",
+    "library/misc/passwords.md",
+    "library/journal/2024-11-17_Action-items_for_career_development.md",
     "personal tracker/2024-12/2024-12-26.md",
     "library/notes/natas.md",
     "library/notes/CS/websockets.md",
@@ -209,13 +231,6 @@
     "library/notes/Data_Science/correlation.md",
     "library/notes/Data_Science/bias_variance_tradeoff.md",
     "library/notes/Data_Science",
-    "library/journal/2024-12-21 Action Items FR.md",
-    "library/notes/llms/structured_outputs_from_llms.md",
-    "library/notes/llms/finetuning_LLMs.md",
-    "library/notes/DL/Deep_Learning.md",
-    "library/notes/nlp/similar_text_search.md",
-    "library/notes/Data Science/linear_functions_aka_models.md",
-    "library/notes/Data Science/bias_variance_tradeoff.md",
     "temp.ipynb",
     "library/notes/DL",
     "Untitled.canvas",
@@ -225,7 +240,6 @@
     "personal tracker/dec 2024",
     "personal tracker/daily/temp.ipynb",
     "media/Screenshot 2024-08-22 at 3.17.26 AM.png",
-    "library/notes/graphs",
     "media/Transposed-Convolutional-2.png",
     "media/Transposed-Convolutional-1.png",
     "media/Screenshot 2024-08-21 at 2.30.09 AM.png",

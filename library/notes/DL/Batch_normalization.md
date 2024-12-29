@@ -28,6 +28,10 @@ This sequence ensures that the activations are properly normalized before applyi
   BatchNorm is applied before the activation function because normalizing the inputs to the non-linearity often leads to better training dynamics. If BatchNorm were applied after the non-linearity, the normalized values would be less effective, especially for activations like ReLU that zero out negative inputs.
   
 ### Formula
+However, forcing all the pre-activations to be zero and unit standard deviation across all batches can be too restrictive. It may be the case that the fluctuant distributions are necessary for the network to learn certain classes better.
+
+To address this, batch normalization introduces two parameters: a scaling factor `gamma` (γ) and an offset `beta` (β)
+
 For a mini-batch of size \( m \), and each feature \( x_i \) **ie each channel** in the batch, BatchNorm transforms the input as follows:
 
 1.	Compute Mean and Variance for Each Channel:
@@ -45,7 +49,7 @@ $$ y_{b,c,h,w} = \gamma_c \hat{x}_{b,c,h,w} + \beta_c $$
 
 where $\gamma$ and $\beta$ are learnable parameters that allow the network to maintain its capacity to represent complex functions.
 
-
+However, at test time (inference time), we may not necessarily have a batch to compute the batch mean and variance. To overcome this limitation, the model works by maintaining a [moving average](https://mathworld.wolfram.com/MovingAverage.html) of the mean and variance at training time, called the moving mean and moving variance. These values are accumulated across batches at training time and used as mean and variance at inference time.
 ### Applications
 - **Convolutional Neural Networks (CNNs)**: BatchNorm is widely used in CNNs to stabilize training and improve convergence.
 - **Deep Feedforward Networks**: It helps in speeding up training and improving performance by reducing internal covariate shift.
@@ -61,3 +65,16 @@ where $\gamma$ and $\beta$ are learnable parameters that allow the network to ma
 - **Instance Normalization**: Normalizes per feature map, often used in style transfer tasks.
 
 Overall, BatchNorm has become a standard technique in training deep neural networks due to its effectiveness in speeding up training and improving generalization.
+
+### Limitations of Batch Normalization
+
+Two limitations of batch normalization can arise:
+
+- In batch normalization, we use the _batch statistics_: the mean and standard deviation corresponding to the current mini-batch. However, when the batch size is small, the sample mean and sample standard deviation are not representative enough of the actual distribution and the network cannot learn anything meaningful.
+- As batch normalization depends on batch statistics for normalization, it is less suited for sequence models. This is because, in sequence models, we may have sequences of potentially different lengths and smaller batch sizes corresponding to longer sequences.
+
+ layer normalization is another technique that can be used for sequence models. For convolutional neural networks (ConvNets), batch normalization is still recommended for faster training.
+
+References
+- https://www.pinecone.io/learn/batch-layer-normalization/
+- [paper](https://arxiv.org/abs/1502.03167)
