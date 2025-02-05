@@ -4,39 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "930960c7c7f1c0a2",
+        "id": "7d0060980716b498",
         "type": "tabs",
         "children": [
           {
-            "id": "49a412562fe2eaf4",
+            "id": "8c584d7535be2f65",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "library/journal/2024-12-21_Action_Items_FR.md",
-                "mode": "source",
+                "file": "library/utils/git_utils.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-12-21_Action_Items_FR"
-            }
-          },
-          {
-            "id": "ff4b1c4ef96ce6b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "library/notes/DL/Batch_normalization.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Batch_normalization"
+              "title": "git_utils"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -55,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTime"
+                "sortOrder": "byCreatedTime",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -92,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.50484466552734
+    "width": 225.50484466552734
   },
   "right": {
     "id": "10048318e88c3884",
@@ -154,10 +140,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "personal tracker/2024-12/2024-12-26.md"
+                "file": "library/misc/passwords.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 2024-12-26"
+              "title": "Outline of passwords"
             }
           },
           {
@@ -200,13 +186,37 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ff4b1c4ef96ce6b9",
+  "active": "8c584d7535be2f65",
   "lastOpenFiles": [
+    "media/embedding-layer-output.png",
+    "library/misc/passwords.md",
+    "library/utils/conda_utils.md",
     "library/blogs/0_attention_is_all_u_need.md",
-    "library/blogs/0_attention_is_all_u_need .md",
-    "library/blogs/0_attention_is_all_u_need 1.md",
-    "library/blogs/0_attention_is_all_u_need copy.md",
-    "library/notes/DL/Batch_normalization.md",
+    "blog-ideas.md",
+    "project-ideas.md",
+    "query optimization.md",
+    "index.md",
+    "library/utils/git_utils.md",
+    "library/utils/docker_utils.md",
+    "library/utils/dvc.md",
+    "personal tracker/2025-01/2025-01-14.md",
+    "library/notes/CS/fastapi, uvicorn, gunicorn.md",
+    "fmt/aws authentication.md",
+    "library/notes/CS/javascript.md",
+    "media/Screenshot 2025-01-16 at 12.58.48 PM.png",
+    "library/notes/DSA/general_tips.md",
+    "library/notes/DSA/binary_search.md",
+    "library/notes/DSA/topic_wise.md",
+    "library/notes/CS/module_comparison_-_queue_vs_heapq.md",
+    "library/notes/CS/interpreted_vs_compiled_language.md",
+    "library/notes/Data_Science/How_to_deal_with_corrupt_labels_.md",
+    "library/notes/Focal_loss.md",
+    "library/notes/CS/python_(adv_obv).md",
+    "library/notes/aws.md",
+    "library/utils/cli_utils.md",
+    "personal tracker/2025-01/2025-01-07.md",
+    "library/misc/Untitled",
+    "personal tracker/2025-01",
     "media/seq2seq.png",
     "media/rnn_enc_dec.png",
     "media/pramod-transformers-sa-intuition.png",
@@ -216,30 +226,8 @@
     "media/illustrated-transformer-fig-encoder-full-detailed.png",
     "media/illustrated-transformer-fig-21432.png",
     "media/illustrated-transformer-fig-6543.png",
-    "media/batch-norm-layer-norm.png",
     "library/blogs",
-    "library/notes/vision/Convolutions.md",
-    "library/notes/vision/CNNs.md",
-    "blog-ideas.md",
-    "library/journal/2024-12-21_Action_Items_FR.md",
-    "index.md",
-    "library/misc/passwords.md",
-    "library/journal/2024-11-17_Action-items_for_career_development.md",
-    "personal tracker/2024-12/2024-12-26.md",
-    "library/notes/natas.md",
-    "library/notes/CS/websockets.md",
-    "library/notes/CS/python_packages.md",
-    "library/notes/CS/python_(adv_obv).md",
-    "library/notes/CS/module_comparison_-_queue_vs_heapq.md",
-    "library/notes/CS/heapq_module.md",
-    "library/notes/CS/asyncio.md",
-    "library/notes/CS/CORS.md",
     "library/notes/CS",
-    "library/notes/Data_Science/trees.md",
-    "library/notes/Data_Science/relu_vs_tanh_vs_sigmoid.md",
-    "library/notes/Data_Science/probability.md",
-    "library/notes/Data_Science/optimizers.md",
-    "library/notes/Data_Science/linear_regression.md",
     "library/notes/Data_Science",
     "temp.ipynb",
     "library/notes/DL",
@@ -247,8 +235,6 @@
     "personal tracker/2023/weekly",
     "personal tracker/2023",
     "personal tracker/2024-12",
-    "personal tracker/dec 2024",
-    "personal tracker/daily/temp.ipynb",
     "Untitled 1.canvas"
   ]
 }

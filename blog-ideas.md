@@ -1,5 +1,5 @@
 
-- from bert to modernbert !!
+- from bert to modernbert!!
 - transformers, transformers!!
 	- why did we remove recurrance?
 	- must be easily understnable.
@@ -13,5 +13,6 @@
 		- why is softmax everywhere?
 		- why log everywhere?
 		- what does activation fucntion really do?
-	
-
+- flask under the hood. wsgi etc.
+- *JavaScript* a simple app/webiste something. (this leads to very interesting client facing applications. i could have actually shipped and **SOLD** the ai interview agent thing!!!)
+- 

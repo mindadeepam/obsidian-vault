@@ -59,13 +59,13 @@ Since mac by default has zsh, these commands are mostly zsh specific.
   
 
 - find a file in file directory: `find . -name results`
-- find free space : `free -h`
+- find free space, linux: `free -h`
 ---
 
 ## Other commands
 
 
-### 1. How to run a command in background, s.t. it keeps running even if we shut down the terminal
+### 1. How to run a command in background, s.t. it keeps running even if we shut down the terminal?
 
 
 ```
@@ -129,6 +129,7 @@ Using `screen` allows you to keep commands running even if the terminal or SSH s
 
 
 
+
 ### 2. gsutil
 
 - copy a dir recursively from gcp to local
@@ -138,7 +139,8 @@ Using `screen` allows you to keep commands running even if the terminal or SSH s
   
   eg: `gsutil -m cp -r -P  gs://fmt-ds-bucket/dev/grain_classification_model_data/imgs/wheat . 
 
-### 3. Launching a process from a running process; Differences Between os.execvp, subprocess.run, and os.system
+### 3. Launching a process from a running process; Differences Between os.execvp, subprocess.run, and os.system.
+
 
 
 

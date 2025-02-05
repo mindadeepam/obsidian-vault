@@ -2,5 +2,6 @@
   "alwaysUpdateLinks": true,
   "promptDelete": false,
   "spellcheck": false,
-  "attachmentFolderPath": "media"
+  "attachmentFolderPath": "media",
+  "showLineNumber": true
 }

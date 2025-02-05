@@ -5,7 +5,7 @@
 wrt array sizes of inputs:
 
 - If n ≤ 1000: O(n^2) or better
-- If n ≤ 210^5: O(n log n) or better
+- If n ≤ 2 * 10^5: O(n log n) or better
 - If n ≤ 10^6: O(n) or better
 - If n ≤ 10^9: O(log n) or better
 

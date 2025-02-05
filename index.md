@@ -34,7 +34,7 @@
 - [SQLAlchemy.md](./library/notes/SQLAlchemy.md)
 - [Multiprocessing vs Multithreading vs Asyncio.md](./library/notes/Multiprocessing_vs_Multithreading_vs_Asyncio.md)
 - [Fast or Large data processing.md](./library/notes/Fast_or_Large_data_processing.md)
-- [How to deal with corrupt labels .md](./library/notes/How_to_deal_with_corrupt_labels_.md)
+- [How to deal with corrupt labels .md](How_to_deal_with_corrupt_labels_.md)
 - [Batch normalization.md](Batch_normalization.md)
 - [Inter-repo actions workflows.md](./library/notes/Inter-repo_actions_workflows.md)
 - [Transactions.md](./library/notes/Transactions.md)

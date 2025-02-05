@@ -1,15 +1,20 @@
-# 1
+# 1 docker cli
 
-Here's a comprehensive list of useful Docker commands:
+Here's a comprehensive list of useful Docker cli commands:
 
 1. **Basic Operations**:
 ```bash
 # Build image
+# bsaic command. '.' is build context. this is what is copied when COPY . . is used. everything inside this is accesible only to the container. 
+docker build .
+# t is tag name.
 docker build -t myapp .
 docker build -f path/to/Dockerfile -t myapp .
+# no cache means cached layers are not used. fresh build everytime
+docker build --no-cache  -f=./Dockerfile -t vizdum .  
 
 # Run container
-docker run -d -p 8000:8000 myapp  # Detached mode with port mapping
+docker run -d -p 8000:8000 myapp  # Detached mode with port mapping device-port:container-port
 docker run -it myapp bash         # Interactive mode with bash
 docker run --name mycontainer myapp  # Named container
 
@@ -168,7 +173,7 @@ These commands should cover most common Docker operations!
 
 
 --- 
-# 2
+# 2 containers and images management and cleanup
 
 Here are the key Docker commands for listing containers and images:
 
@@ -239,3 +244,134 @@ Common options:
 - `-q` or `--quiet`: Only display numeric IDs
 - `-f` or `--filter`: Filter output based on conditions
 - `--format`: Pretty-print container/image output using a Go template
+
+
+# 3. dockerfile 
+
+**Dockerfile Command Reference**
+
+**1. Basics**
+
+`FROM <image>  `
+
+- Sets the **base image** for the build
+- Example: FROM ubuntu:20.04
+
+`LABEL <key>=<value>`
+
+- Adds **metadata** to the image
+- Example: LABEL maintainer="user@example.com"
+
+`ARG <name>=<default_value>`
+
+- Defines a **build-time variable**
+- Example: ARG VERSION=1.0
+- Pass with: docker build --build-arg VERSION=2.0 .
+
+`ENV <key>=<value>`
+
+- Sets an **environment variable** available at build and runtime
+- Example: ENV APP_ENV=production
+
+**2. Files and Directories**
+
+`COPY <src> <dest>`
+
+- Copies files from **host to image**
+- Example: COPY ./app /app
+
+`ADD <src> <dest>`
+
+- Like COPY, but can **unpack tar files** or download URLs
+- Example: ADD archive.tar.gz /app
+
+`WORKDIR <path>`
+
+- Sets the **working directory** for commands
+- Example: WORKDIR /app
+
+**3. Execution**
+
+`RUN <command>`
+
+- Executes **shell commands** during build
+- Example: RUN apt-get update && apt-get install -y nginx
+
+`CMD ["executable", "arg1", "arg2"]`
+
+- **Default command** to run when the container starts
+- Example: CMD ["nginx", "-g", "daemon off;"]
+- Can be overridden by docker run <image> <command>.
+
+`ENTRYPOINT ["executable", "arg1"]`
+
+- Similar to CMD, but **always executed** (cannot be easily overridden)
+- Example: ENTRYPOINT ["python", "app.py"]
+
+`EXPOSE <port>`
+
+- Documents the **port** the container listens on
+- Example: EXPOSE 8080
+
+- Does **not** publish the port automatically (use -p).
+
+**4. Container Settings**
+
+`VOLUME ["/path"]`
+
+- Defines mount points for **persistent storage**
+- Example: VOLUME ["/data"]
+
+`USER <username>`
+
+- Switches to a **specific user** inside the container
+- Example: USER appuser
+
+`HEALTHCHECK [OPTIONS] CMD <command>`
+
+- Defines a **health check** for the container
+- Example: HEALTHCHECK CMD curl --fail http://localhost || exit 1
+
+**5. Optimization**
+
+`ONBUILD <command>`
+
+- Specifies a command to run **when the image is used as a base** for another build.
+
+`SHELL ["/bin/bash", "-c"]`
+
+- Changes the default shell used by RUN.
+
+**6. Default Execution Order**
+
+1. FROM
+
+2. ARG
+
+3. LABEL
+
+4. ENV
+
+5. COPY/ADD
+
+6. WORKDIR
+
+7. RUN
+
+8. EXPOSE
+
+9. VOLUME
+
+10. ENTRYPOINT
+
+11. CMD
+
+**7. Best Practices**
+
+- Minimize layers by chaining commands:
+
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+
+- Use .dockerignore to exclude unnecessary files
+- Keep images **small** by using lightweight base images like alpine
+- Leverage multi-stage builds to reduce final image size.
