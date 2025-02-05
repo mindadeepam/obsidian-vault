@@ -1,76 +1,45 @@
-# Transformers samjha de bhai
-
-In this blog, I am going to explain in detail, and implement in code the paper [Attention is all you need](https://arxiv.org/pdf/1706.03762.pdf). 
-It was a pivotal paper in the field of deep learning that introduced the transformer architecture and has been used as a backbone for today's most popular SOTA models. Most of the frontier text generating AI models like Chatgpt, Claude and Gemini are based on this architecture. There altready exists a ton of similar blogs out there, but I am going to try to explain it in a way that is easy for me to understand. More than anything, its a way for me to document my understanding of the paper.  
-
-Throughout this blog I explain each component of the transformer model in detail, looking at both the how and why of each component. I also provide the code for each component, which I highly recommend you atleast skim through to really understand how it works.
-First, lets look back at the critical papers that led to the transformer architecture.
+# Why is Attention is all you need?
 
 
-## Table of contents:
+In this blog, I am going to implement the paper [Attention is all you need](https://arxiv.org/pdf/1706.03762.pdf). It was a pivotal paper in the field of deep learning and has been used as a backbone for today's most popular SOTA models. But lets take a look back at how we got to this point.
 
-- [Language Modelling - Theoritical Foundations](#language-modelling---theoritical-foundations)
-- [Seq2Seq: Machine Translation](#seq2seq-machine-translation)
-- [Transformers!](#transformers)
-- [Tokenization](#tokenization)
-- [Embedding Layer](#embedding-layer)
-- [Encoder block](#encoder-block)
-- [Self attention](#self-attention)
-- [Multi-head attention](#multi-headed-attention-mha)
-- [Residual Connections](#residual-connections)
-- [Layer Normalization](#layer-normalization)
-- [References](#references)
+## Language Modelling and Machine Translation
 
+Understanding Language has been a long standing problem in the field of AI, falling under the umbrella of Natural Language Processing (NLP). ALthough models today are almost better than humans on most NLP "benchmarks", this was not the case pre-2018. Among the different problems in NLP, Language translation was one of the most important one. For the longest time Statistical Machine Translation (SMT) models were used, which was based on purely statistical methods. Other methods like Rule-Based Translation (RBT) and N-gram were also used. But they all suffered from the problem of being brittle and not generalizable, required manual feature engineering and were not able to handle long sentences.
 
-
-
-
-
-# Language Modelling - Theoritical Foundations
-
-Understanding Language has been a long standing problem in the field of AI, falling under the umbrella of Natural Language Processing (NLP). ALthough models today are almost better than humans on most NLP "benchmarks", this was not the case pre-2018. Among the different problems in NLP, Language translation was one of the most important one. For the longest time Statistical Machine Translation (SMT) models were used, which was based on purely statistical methods. Other methods like Rule-Based Translation (RBT) and N-gram were also used. However statistical methods suffered from the problem of being brittle and not generalizable, required manual feature engineering and were not able to handle long sentences. But once deep-learning started flourishing, efforts were made to replace the earlier statistical methods with neural networks. 
+But once deep-learning started flourishing, efforts were made to replace the earlier statistical methods with neural networks. 
 
 Understanding Language is tightly linked with the problem of word prediction. What is word prediction anyways? Its the problem of predicting the next word in a sequence, given the previous words. i.e suppose we take a text corpus of several physics books. For a sentence like "light tranvels faster than ____", we want to predict the next word. ie we want to find $P(w|h)$ where $h$ is the history of the sentence and w is the next word. One way to do it would be to count that of the total number of times this phrase occurs in the corpus, and out of those times what was the distribution of the following word. You're likely to find that "sound" has the highest probability. 
 
 In this case, we are correct. But this is a statistical approach that doesn't capture the context of the sentence.
-
 $$
 P(sound|\text{light tranvels faster than}) = \frac{C(\text{light tranvels faster than sound})}{C(\text{light tranvels faster than})}
 $$
 
 The assumption that the current word only depends on what came before it is called the Markov assumption. Using the chain rule, we can express the probability of an entire sentence as the product of individual conditional probabilities of all the words in the sentence. Generalizing, a statistical model of language can be represented by the conditional probability of the next word given all the previous ones, since
-
-To explain the probability of a sequence of words, we can use the example sentence *light travels faster than sound*. The probability of this entire sentence can be expressed as:
-$$
-P(\text{light travels faster than sound}) = P(\text{light}) \cdot P(\text{travels} | \text{light}) \cdot P(\text{faster} | \text{light travels}) \cdot P(\text{than} | \text{light travels faster}) \cdot P(\text{sound} | \text{light travels faster than})
-$$
-This means that to calculate the probability of the entire sentence, we multiply the probability of each word given the words that came before it. In a more compact form, this can be represented as:
-
 $$
 P(w_1^T) = P(w_1)P(w_2|w_1)P(w_3|w_{1:2})...P(w_t|w_{1:t-1}) = \prod_{t=1}^{T} P(w_t | w_1^{t-1})
 $$
-where  $w_1^T$ represents the sequence of words in the sentence.
 
 N-gram models work on the assumption that the probability of the next word is only dependent on the previous $n$ words, thus simplyfying a lot of the calculations ie 
 $$
 P(w_1^T) = P(w_t|w_{1}^{t-1}) \approx P(w_t|w_{t-n+1}^{t-1}) =  \prod_{t=1}^{T} P(w_t | w_{t-n+1}^{t-1})
 $$
 
+
+
+
 Yoshua Bengio etal. in 2003 [1] proposed a neural network based language model that could predict the next word in a sequence. This was the first step towards replacing the statistical methods with neural networks that had distributed representation of words. Now what does that mean? Till now we have treated each word as a discrete entity. But in a language, words are not independent of each other. They have a lot of context and meaning. Some words are more similar to each other than others. N-gram models also miss the context of the entire sentence, focussing on the last $n$ words.   
 
 > "here we push this idea to a large scale, and concentrate on learning a statistical model of the distribution of word sequences, rather than learning the role of words in a sentence"  
 
-Having distributed representation of words [3] means that the words are represented by a dense vector of real numbers, instead of a one-hot encoded vector. The probabilty function of word sequences is then modelled as a function of these word vectors. Both the probabilty function parameters and the representation are learned, which means that the model learns the representation of the words from the data. This helps mitigate high dimensionality and sparsity of the data and allows the model to capture the context of the sentence and the relationship between words. The idea of learning distributed representations of words had been done by Bellegarda (1997) ealier but they used a statistical n-gram model instead of a neural network.
+Having distributed representation of words [3] means that the words are represented by a dense vector of real numbers, instead of a one-hot encoded vector. The probabilty function of word sequences is then modelled as a function of these word vectors. Both the probabilty function parameters and the representation are learned, which means that the model learns the representation of the words from the data This helps mitigate high dimensionality and sparsity of the data and allows the model to capture the context of the sentence and the relationship between words. The idea of learning distributed representations of words was had been done by  Bellegarda (1997) ealier but they used a statistical n-gram model.
 
 In their work, Bengio etal trained a feed forwrd network to jointly learn both the word vector represenations and the statistical language model. 
 
-Then around 2013-14, landmark papers like word2vec and glove [4,5] showed us better ways to learn word representation vectors. Most of the progress here came from better model architectures via more intuitive biases and a training on a much larger data enabled by efficient training methods (like [negative sampling](https://chatgpt.com/share/678be733-f670-800c-9262-663d031f4c22)).
+Then around 2013-14, landmark papers like word2vec and glove [4,5] showed us better ways to learn word representation vectors. Most of the progress here came from better model architectures via more intuitive biases and a larger data size.
 
-
-
-# Seq2Seq: Machine Translation
-
-But apart from good word representations, we also need real world use cases like genersting sequences of words. Machine Translation was one of the hottest problems in this field at the time. Statistical Machine Translation (SMT) models were the most popular ones. Going deeper into SMTs is out of scope for this blog, but you can refer to this [blog](https://mardiyyah.medium.com/statistical-machine-translation-a-data-driven-translation-approach-8a5dc15ba057) for more details.
+But apart from good word representations, we also need real world use cases like genersting sequences of words. Machine Translation was one of the hottest problems in this field at the time. Statistical Machine Translation (SMT) models were the most popular ones. Going deeper into that is out of scope for this blog, refer to this [blog](https://mardiyyah.medium.com/statistical-machine-translation-a-data-driven-translation-approach-8a5dc15ba057) for more details.
 
 Cho etal. in 2014 [6] proposed a seq2seq model that used RNNs to model phrase pairs as part of a SMT model. Their model consists of two recurrent neural networks (RNN) that act as an encoder and a decoder pair. The encoder maps a variable-length source sequence to a fixed-length vector, and the decoder maps the vector representation back to a variable-length target sequence. The two networks are trained jointly to maximize the conditional probability of the target sequence given a source sequence. 
 
@@ -106,9 +75,9 @@ The model is trained to maximize the conditional probability of the target seque
 $$
 \max_{\theta} \frac{1}{N} \sum_{t=1}^{N} \log p_\theta(y_t | x_t) 
 $$
-where $x_t$ is the source sequence, $y_t$ is the target sequence, and $\theta$ represents the model parameters. In this paper the authors actually used their interpretation of gating like LSTMs as the usual activation of *tanh* didnt yield meaningful results. 
+where $x_t$ is the source sequence, $y_t$ is the target sequence, and $\theta$ represents the model parameters. In this paper the authors actually used their interpretation of gating like LSTMs as the usual activation of tanh didnt yield meaningful results. 
 
-Features from this model were used as a part of a phrase based SMT system and was trained on phrase pairs of English and French. Naturally as deep learning flourished, papers like [7,8,9] advanced the field of neural machine translation where the entire translation was done by the neural model itself. Sutskever et al., 2014 [7] used LSTMs and achieved near SOTA for machine translation tasks. Their model was a 4 layer LSTM with 384 million parameters. They found that reversing the input sentences helped the model learn the translation better and to mitigate exploding graidents they enforced a hard constraint on the norm of the gradient. When used in a SMT system, the model was able to achieve SOTA results. 
+This looks like a solid foundation for end to end sequence modelling, it was just a part of a phrase based SMT system and was trained on phrase pairs of English and French. Papers like [7,8,9] advanced the field of neural machine translation where the entire translation was done by the neural model itself. Sutskever et al., 2014 [7] used LSTMs and achieved near SOTA for machine translation tasks. Their model was a 4 layer LSTM with 384 million parameters. They found that reversing the input sentences helped the model learn the translation better and to mitigate exploding graidents they enforced a hard constraint on the norm of the gradient. When used in a SMT system, the model was able to achieve SOTA results. 
 
 Bahadanu et al. in 2014 [8] identified the context vector as a bottleneck and introduced the concept of **attention** to the seq2seq model.
 
@@ -144,13 +113,6 @@ As expected, the model with attention outperforms the model without attention es
 <br>
 
 
-What is attention really? Intuitively you might say that to be able to "attend" means to be able to choose. As lil weng says 
-> In a nutshell, attention in deep learning can be broadly interpreted as a vector of importance weights: in order to predict or infer one element, such as a pixel in an image or a word in a sentence, we estimate using the attention vector how strongly it is correlated with (or “attends to” as you may have read in many papers) other elements and take the sum of their values weighted by the attention vector as the approximation of the target.
-
-One thing it solves is that we can now attend to longer sequences. And these "weights" can be obtained by various methods ranging from simple cosine similarities to neural layer/networks of relevant features.
- 
-
-
 ## But…
 
 - Sequential computation inhibits parallelization.
@@ -158,24 +120,28 @@ One thing it solves is that we can now attend to longer sequences. And these "we
 - We want to model hierarchy.
 - RNNs (w/ sequence-aligned states) seem wasteful!
 
-# Transformers!
+## Transformers!
 
-Following Bahdanu's work, several attempts were made to improve on this attention mechanism and counter the various limitations of RNNs at the same time.  
+Following Bahdanu's work, several attempts were made to improve on this attention mechanism and counter the various limitations of RNNs at the same time. Following the discussion on the paper we will move on to implement it and understand the different parts of it. 
 
-Vasqani et al. in 2017 [10] proposed the transformers architecture which relied solely on attention mechanisms (and other things like linear layers etc, but not RNN layers). Through this we were able to parallelize the training of the model, since we could now process the entire sequence at once. This was a huge step forward in the field of NLP, and along with advancements in hardware (NVDA$$), it allowed us to train much larger models on even larger datasets. At the time of writing (2024 dec) SOTA models routinely contain 10s-100s of *billions* of parameters with training being done on *trillions* of tokens. 
+What is attention really? Intuitively you might say that to be able to "attend" means to be able to choose. As lil weng says 
+> In a nutshell, attention in deep learning can be broadly interpreted as a vector of importance weights: in order to predict or infer one element, such as a pixel in an image or a word in a sentence, we estimate using the attention vector how strongly it is correlated with (or “attends to” as you may have read in many papers) other elements and take the sum of their values weighted by the attention vector as the approximation of the target.
 
-Like the earlier RNN encoder decoders, the original transfomer is also a sequence to sequence model ie, it takes as input a variable length sentence and outputs a variable length sentence.
+One thing it solves is that we can now attend to longer sequences. And these "weights" can be obtained by various methods ranging from simple cosine similarities to neural layer/networks of relevant features.
+ 
+Coming back to transformers, Vasqani et al. in 2017 [10] proposed the transformers architecture which relied solely on attention mechanisms (and other things, but not RNN units). Through this we were able to parallelize the training of the model, since the model was able to process the entire sequence at once. This was a huge step forward in the field of NLP, since along with advancements in hardware, it allowed us to train models on much larger datasets and with much larger models. 
 
-Lets take the french sentence "je suis étudiant" as an example ([reference](https://jalammar.github.io/illustrated-transformer/)). Its english translation is "i am a student".
 
+A transformer takes as input a variable length sentence and outputs a variable length sentence, ie its a sequence to sequence model.
 
+Lets take the french sentence "je suis étudiant" as an example. Its english translation is "i am a student".
 <center>
      <img src="https://jalammar.github.io/images/t/the_transformer_3.png" alt="transformer" width="600" height="150" />
      <!-- <figcaption>Figure 4: The Transformer model.</figcaption> -->
 </center>  
-Similar to the seq2seq models of the past, the transformer model is made up of an encoder and a decoder block. The text first goes through the encoder block and then the decoder block. Both the encoder and decoder blocks are made up of multiple layers of identical submodules which are called **encoder blocks** and **decoder blocks** respectively. Each block outputs a tensor of the same shape as its input tensor, hence maintaining the modularity of the model.
+Similar to the seq2seq models of the past, the transformer model is made up of an encoder and a decoder block.
 <center>
-     <img src="https://jalammar.github.io/images/t/The_transformer_encoders_decoders.png" alt="transformer" width="450" height="250" />
+     <img src="https://jalammar.github.io/images/t/The_transformer_encoders_decoders.png" alt="transformer" width="500" height="250" />
      <!-- <figcaption>Figure 4: The Transformer model.</figcaption> -->
 </center>  
 
@@ -187,39 +153,30 @@ Do not be overwhelmed by the following image, but this is what the transformer m
      <figcaption>Figure 4: The Transformer model.</figcaption>
 </center>  
 
-Now each section below explains in order (mostly) , what each component of the transformer model does. But we are going to start with just a string of words, and focus on just the input.
+But we are going to start with just a string of words.
 
-<center>
-     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/refs/heads/main/media/input-section-1.png" alt="transformer" width="200" height="150" />
-     <figcaption>Input</figcaption>
-</center>  
+## Tokenization
 
-
-
-# Tokenization
-
-```
-```
+$$
+\text{Input: } \text{'je suis étudiant'}
+$$
 The way the model is able to understand a string input is by breaking down the string into multiple "tokens" and mapping each token to a unique integer. For eg if we consider only character tokens, our sentence has the following tokens: 
-
-```python
-Input: 'je suis étudiant'
-vocab_char = {'j', 'e', ' ', 's', 'u', 'i', 'é', 't', 'd', 'a', 'n', 'SOS', 'EOS', 'PAD'}
-```
+$$
+\text{vocab\_char} = \{\text{'j'}, \text{'e'}, \text{' '}, \text{'s'}, \text{'u'}, \text{'i'}, \text{'é'}, \text{'t'}, \text{'d'}, \text{'a'}, \text{'n'}, \text{'SOS'}, \text{'EOS'}, \text{'PAD'}\}
+$$
 
 We also add some special tokens to the vocab like 
-```python
-'<SOS>': start of sequence token
-'<EOS>': end of sequence token
-'<PAD>': padding token
-'<UNK>': unknown token
-```
+
+- the start of sequence token (<SOS>): denotes the start of the sentence.
+- end of sequence token (<EOS>): denotes the end of the sentence.
+- the padding token (<PAD>): denotes the padding of the sentence.
+- the unknown token (<UNK>): denotes the unknown token.
 
 The total number of tokens make up the vocabulary of the model.  If we do word level tokenozation, we get the follwoing vocab:
 
-```python
-vocab_word = {'je', 'suis', 'étudiant', ' ', 'SOS', 'EOS', 'PAD'}
-```
+$$
+\text{vocab\_word} = \{\text{'je'}, \text{'suis'}, \text{'étudiant'}, \text{' '}, \text{'SOS'}, \text{'EOS'}, \text{'PAD'}\}
+$$
 
 There is a slight nuance to consider to manage compute when considering the vocabulary size. Character level tokenization would yield a much smaller vocab, but would end up making the sequence length much longer. On the other hand word level tokenization would yield a larger vocab, but would end up making the sequence length much shorter. The tokens in this paper are subword units which are selected through the Byte Pair Encoding (BPE) algorithm. Essentially the most frequent subword units are selected and used as tokens. Tokenization algirithms is a separate field of study and there are many other algorithms like WordPiece, SentencePiece, etc. that are used in the industry. Here we'll just treat tokenizer like a black box function that takes in a string and returns a list of tokens. 
 
@@ -227,26 +184,20 @@ Obviously the model doesnt understand the token strings, hence we map the tokens
 
 Since the first transformer paper the vocab size has grown from 30k to 100k-200k tokens. While sequence length has grown from 512 in the attention paper to millions of tokens in the SOTA models of 2024. 
 
-``` python
-Input:  ['SOS', 'je', 'suis', 'étudiant', 'EOS']  
-Padded input:  ['SOS', 'je', 'suis', 'étudiant', 'EOS', 'PAD', 'PAD', ... ]  
-Tokenized input:  [100, 101, 102, 103, 104]
-```
+$$
+\text{Input: } [\text{'SOS'}, \text{'je'}, \text{'suis'}, \text{'étudiant'}, \text{'EOS'}]  \\
+\text{Padded input: } [\text{'SOS'}, \text{'je'}, \text{'suis'}, \text{'étudiant'}, \text{'EOS'}, \text{'PAD'}, \text{'PAD'} ... ]  \\ 
+\text{Tokenized input: } [100, 101, 102, 103, 104]  
+$$
 
+## Embedding Layer
 
-
-# Embedding Layer
-
-After tokenization comes the embedding layer. The embedding layer is a layer with learnable parameters which maps each token to a dense vector of fixed length, which we call the **embedding dimension, $d_{model}$**. 
-In very simple terms its a dictionary that maps each token to a vector of length $d_{model}$. In the attention paper, various values of $d_{model}$ were tried, but the most common one was $d_{model}=512$. Hence the embedding layer is a matrix of shape $L \times d_{model}$ that adds a dimension to the input sequence.
+After tokenization comes the embedding layer. The embedding layer is a layer with learnable parameters which maps each token to a dense vector of fixed length, which is the embedding dimension, $d_{model}$. In the attention paper, various values of $d_{model}$ were tried, but the most common one was $d_{model}=512$. Hence the embedding layer is a matrix of shape $L \times d_{model}$ that adds a dimension to the input sequence.
 
 
 $$
 \text{Input: } \mathbb{Z}^{L}
 $$
- 
-<br>
- 
 $$
 \text{Output: } \mathbb{R}^{L \times d_{model}}
 $$
@@ -263,65 +214,37 @@ Semantically embedding layers [1,3] allow us to learn a dense representation of 
 You might have noticed the entire input sequence is being passed through the embedding layer. So how does the model know the order of the tokens in the sequence? For that, we then add **positional encodings** to the input embeddings. For now imagine that the positional encodings are a predefined (ie not learned via backprop) matrix of shape $L \times d_{model}$ that contains the positional information of each token in the sequence. So each index is just mapped to a unique vector which is added elementwise to the embedding vector of that token to produce a new matrix of shape $L \times d_{model}$.
 
 
-
-
-<center>
-     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/refs/heads/main/media/embedding-layer-output.png" alt="embedding" width="700" height="200" />
-     <!-- <figcaption>text -> tokens -> embedding+positional encodings</figcaption> -->
-</center>  
-
-
-# Encoder block
+## Encoder block
 
 So now we have as input a matrix of shape $L \times d_{model}$ that represents the input sequence. This input tensor now goes through the encoder which consists of 6 layers of "encoder blocks". Each encoder block is made up of two sublayers: a multi-head self-attention mechanism and a position-wise feed-forward neural network. 
-The abstraction that is common to all the encoders blocks is that they receive a list of vectors each of the size $L$. In the bottom encoder that would be the word embeddings, but in other encoders, it would be the output of the encoder that’s directly below it. In fact, at least in the original transofmer paper, even the submodules of both the encoder and decoder blocks output the same shape of tensors, ie $L \times d_{model}$. This is an important configuration that keeps everything modular and allows for easy experimentation with different settings.
+The abstraction that is common to all the encoders blocks is that they receive a list of vectors each of the size $L$. In the bottom encoder that would be the word embeddings, but in other encoders, it would be the output of the encoder that’s directly below it. 
+
 <center>
      <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/attention-is-all-u-need-encoder.png" alt="encoder" width="200" height="300" />
      <figcaption>An Encoder block</figcaption>
 </center>  
 
-Lets now look at the first sublayer of the encoder block, the multi-headed self attention mechanism, but before we go to multihead, lets first understand the underlying self attention mechanism.
+Lets now look at the first sublayer of the encoder block, the multi-headed self attention mechanism.
 
+## Self attention
 
+We saw in [8] what advantage attention gives us over non-attention based models. Applying attention means to be able to choose where to attend to in the input sequence. Self attention is the process of attending to the input sequence itself. We need self attention because without it the tokens wont be able to communicate with each other.   
 
-# Self attention
+See the following intuitive explanation of self attention from [12]:   
 
-What is attention and why attention?
+Say the following sentence is an input sentence we want to translate: ”The animal didn't cross the street because it was too tired”.
 
-Attention basically means weighted summations of context vectors. A vector updates itself using weighted summation of other vectors. The weights themselves can be calculated using some notion of similarity like dot product, with very often the vector itself.  This way the vector takes information dynamically from other vectors.
+What does “it” in this sentence refer to? Is it referring to the street or to the animal? It’s a simple question to a human, but not as simple to an algorithm.
 
-For eg, the authors in [8] had an encoder-decoder rnn model and instead of taking the last hidden state of the encoder as the context vector for the decoder, they used attention to choose the context vector dynamically. Lets say we have n vectors $h_1, h_2, .., h_n$ from the encoder and we have a vector $s$ from decoder. Now we want to get a context vector $c$ from these encoder vectors but not by simply averaging all of them. We want to get a dynamically weighted sum of the encoder vectors, where the weights are the attention scores. To calculate the attention scores we need to compute the dot product of $s$ with each of the encoder vectors. Get these in probabilities by taking a softmax.
-$$
-a_i = s \cdot h_i \quad \text{for } i \in \{1, 2, .., n\}
-$$
-
-$$
-a = \text{softmax}(a)
-$$
-
-Now the context vector can be obtained by taking a weighted sum of the encoder vectors with these attention scores.
-$$
-c = \sum_{i=1}^{n} a_i h_i
-$$
-
-This is the basic attention mechanism. Applying attention means to be able to choose where to attend to in the input sequence. 
-
-Self attention is when the input sequence attends to itself. Suppose a sequence of tokens $x_1, x_2, .., x_n$ is given as input. In self attention, each token vector updates itself using the other token vectors in the sequence. It is very much like a message passing system.
-
-<!-- Self attention allows the tokens to communicate with each other. It is very much like a messsgse passing system. The version used in transformers is similar to dot product attention, but with a few more steps. -->
-
-*See the following intuitive explanation of self attention from [12]:*
-
-Say the following sentence is an input sentence we want to translate: ”The animal didn't cross the street because it was too tired”. What does “it” in this sentence refer to? Is it referring to the street or to the animal? It’s a simple question to a human, but not as simple to an algorithm. When the model is processing the word “it”, self-attention allows it to associate “it” with “animal”. As the model processes each word (each position in the input sequence), self attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word.
+When the model is processing the word “it”, self-attention allows it to associate “it” with “animal”. As the model processes each word (each position in the input sequence), self attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word.
 
 If you’re familiar with RNNs, think of how maintaining a hidden state allows an RNN to incorporate its representation of previous words/vectors it has processed with the current one it’s processing. Self-attention is the method the Transformer uses to bake the “understanding” of other relevant words into the one we’re currently processing.
-
 <center>
      <img src="https://jalammar.github.io/images/t/transformer_self-attention_visualization.png" alt="transformer" width="350" height="400" />
      <figcaption>Fig: Self attention</figcaption>
 </center>  
 
-The two most commonly used attention functions are additive attention and dot-product (multiplicative) attention. Additive attention computes the compatibility function using a feed-forward network (as in [8]) with a single hidden layer. While the two are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
+The two most commonly used attention functions are additive attention and dot-product (multiplicative) attention. Additive attention computes the compatibility function using a feed-forward network with a single hidden layer. While the two are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
 
 
 Lets assume the input tensor $x$
@@ -337,17 +260,16 @@ x_i \in \mathbb{R}^{d_{model}}
 $$
 
 Every input token vector $𝐱_i$ is used in three different ways in the self attention operation:
-- It is compared to every other vector to establish the weights for its own output $𝐲_i$. We’ll refer to this role as a query
-- It is compared to every other vector to establish the weights for the output of the $j^{th}$ vector $𝐲_j$. We’ll refer to this role as a key
-- It is used as part of the weighted sum to compute each output vector once the weights have been established. We’ll refer to this role as a value
+- It is compared to every other vector to establish the weights for its own output $𝐲_i$
+- It is compared to every other vector to establish the weights for the output of the $j^{th}$ vector $𝐲_j$
+- It is used as part of the weighted sum to compute each output vector once the weights have been established.
 
-In the basic self-attention we've seen so far, each input vector must play all three roles. 
+These roles are often called the query, the key and the value (we'll explain where these names come from later). In the basic self-attention we've seen so far, each input vector must play all three roles.
 We project the same input vector (denoted as $\mathbb{x_i}$) into 3 different vectors, query $(q_i)$, key $(k_i)$ and value $(v_i)$, by multiplying it with 3 different weight matrices $W_k$, $W_q$ and $W_v$ of shape $d_{model} \times d_{model}$.
 
 $$ 
 k_i = W_k \mathbb{x_i} \quad q_i = W_q \mathbb{x_i} \quad v_i = W_v \mathbb{x_i} 
 $$
-<br>
 
 <center>
      <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/illustrated-transformer-fig-21432.png" alt="encoder" width="600" height="350" />
@@ -358,7 +280,7 @@ Note that the projection matrices are applied across the embedding dimension. Th
 
 To understand further we will have to switch to the matrix view of the input tensor.
 
-## Matrix view: 
+### Matrix view: 
 
 The entire input sequence matrix $X \in \mathbb{R}^{L \times d_{model}}$ when multiplied by the projection matrices results in output matrices of shape $L \times d_{model}$.
 $$
@@ -392,7 +314,7 @@ where $Y \in \mathbb{R}^{L \times d_{model}}$ ie same shape as the input.
      <figcaption>Fig: Matrix view of self attention. Every row in the X matrix corresponds to a word in the input sentence.</figcaption>
 </center>  
 
-## Token level view:
+### Token level view:
 
 For $a_{ij}$ the attention score between the $i^{th}$ token and the $j^{th}$ token, it is computed using the scaled dot product of the $i^{th}$ query vector and the $j^{th}$ key vector. **This is where the inter-token communication b/w tokens i and j happens.**
 
@@ -419,61 +341,15 @@ This diagram should now be very easy to understand. (Masking will be covered lat
      <figcaption>Fig: Scaled Dot product attention</figcaption>
 </center>  
 
-
-Go through the short code below to really understand how the self attention works.
-<details>
-<summary>In code we have:</summary>
-
-```python
-import torch
-import torch.nn as nn
-import math
-from torch.nn.functional import softmax
-
-class SelfAttention(nn.Module):
-    def __init__(self, d):
-        super().__init__()
-        self.d = d
-        self.tokey= nn.Linear(self.d, self.d)
-        self.tovalue= nn.Linear(self.d, self.d)
-        self.toweight= nn.Linear(self.d, self.d)
-    
-    def forward(self, x):
-        # x shape:  batch_size, seq_len, d
-        K = self.tokey(x)    # (batch_size, seq_len, d)
-        Q = self.toweight(x)    # (batch_size, seq_len, d)
-        V = self.tovalue(x)    # (batch_size, seq_len, d)
-
-        attention_scores =  (Q @ (K.transpose(-2,-1))) / math.sqrt(self.d)    # (batch_size, seq_len, seq_len)
-        attention_probs = softmax(attention_scores , dim=-1)    # (batch_size, seq_len, seq_len)
-        output = attention_probs @ V  # (batch_size, seq_len, d)
-        
-        return output
-
-```
-</details>
-
-
-# Multi-headed Attention (MHA)
+## Multi-headed Attention (MHA)
 
 <center>
      <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/attention-is-all-u-need-mha.png" alt="encoder" width="200" height="300" />
      <figcaption>Fig: Multi-headed attention</figcaption>
 </center>  
 
-Mulitple heads gives the attention layer multiple “representation subspaces” hence learning multiple types of relationships between tokens and creating a more robust and expressive representation of the input sequence. Think of it as performing grouped convolutions with different kernel sizes.
-Note that differernt tokens in a sequence share the $W_k, W_q, W_v$ projection matrices. This means we are capturing one meaningful concept expressed in the $W_k, W_q, W_v$ projection matrices. Hence having multiple heads is like having multiple such concepts.   
-But this also makes our computation more expensive. Lets say the number of attention heads is $h$ (in the paper $h=8$). We now have to do $h$ separate self attention operations. But there is a way to make this more efficient. 
-
-Instead of viewing the input tensor as $(B,L,d_{model})$ we split the $d_{model}$ into $d_{head} = d_{model} // h$ dimensions and view it as a matrix of shape $(num\_heads, d_{head})$.
-Hence, after rearranging the dimensions we have:
-$$ 
-input \in \mathbb{R}^{B,L,d_{model}} \rightarrow \mathbb{R}^{B,L,h,d_{head}}
-$$ 
-
-
-Now we can apply diff heads. 
-The projection matrices $W_q, W_k, W_v$ of shape $d_{model} \times \frac{d_{model}}{h}$. Hence for the $i^{th}$ attention head, we have the following:  
+Since each token depends on each other in the the scaled-dot product attention layer, it cant be parallelized. To get around this, we use multiple attention heads. Mulitple heads also gives the attention layer multiple “representation subspaces” hence learning multiple types of relationships between tokens and creating a more robust and expressive representation of the input sequence.  
+Lets say the number of attention heads is $h$ (in the paper $h=8$). We project input tensor from length $L$ to $L/h$ for each attention head. $h$ such projections are done in parallel. and their result is concatenated to get back the original length $L$. This is done by making the projection matrices $W_q, W_k, W_v$ of shape $d_{model} \times \frac{d_{model}}{h}$. Hence for the $i^{th}$ attention head, we have the following:  
 
 $$
 X \in \mathbb{R}^{L \times d_{model}} 
@@ -494,19 +370,14 @@ $$
 A_i = \text{softmax}(\frac{Q_iK_i^T}{\sqrt{d_{model}}}) \quad \text{where } A_i \in \mathbb{R}^{L \times L}
 $$
 $$ 
-Z_i = A_iV_i \quad \text{where } Z_i \in \mathbb{R}^{L \times \frac{d_{model}}{h}}
+Y_i = A_iV_i \quad \text{where } Y_i \in \mathbb{R}^{L \times \frac{d_{model}}{h}}
 $$
 
 
-The output of the attention heads are concatenated and passed through a linear layer to produce the final output. Hence, we get back the original length $L$.
-
-
-$$
-Z = \text{concat}(Z_1, Z_2, ..., Z_h)
-$$
+The output of the attention heads are concatenated and passed through a linear layer to produce the final output.
 
 $$
-output = ZW_o \quad \text{where } output \in \mathbb{R}^{L \times d_{model}}, W_o \in \mathbb{R}^{d_{model} \times d_{model}}
+Y = \text{concat}(Y_1, Y_2, ..., Y_h)W_o \quad \text{where } Y \in \mathbb{R}^{L \times d_{model}}, W_o \in \mathbb{R}^{d_{model} \times d_{model}}
 $$
 
 $W_o$ is the output projection matrix. It allows some computation after concatenation of outputs from different attention heads.  
@@ -519,118 +390,7 @@ Looking at everything in the self attention block, we have:
 </center>  
 
 
-**It is important to note that self-attention is a linear transformation.** This is a huge part of what makes it so easily parallelizable and optimal for backpropagation. 
-Linear transformations esseantially project the information into a space where dot products beacome meaningful.[13]
-
-Here is an an excellent analogy I found helpful from [Pramod Goyal's excellent blog on transformers](https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block)  
-
-<center>
-     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/pramod-transformers-sa-intuition.png" alt="encoder" width="600" height="500" />
-     <figcaption>Fig: Self attention exlained, Transformers Laid Out - Pramod Goyal</figcaption>
-</center>    
-
-
-Again, I highly reccomend reading the below given code as well to really understand how the multiheaded attention works.
-
-
-<details>
-<summary>In code we have:</summary>
-
-```python
-
-class MultiHeadedAttention(nn.Module):
-    def __init__(self, heads, d):
-        super().__init__()
-        self.d = d
-        self.h = heads
-        
-        assert self.d%self.h==0, "d must be divisible by num of heads"
-        self.d_head = self.d // self.h
-        
-        # h self attentionblocks
-        self.attention_blocks = [SelfAttention(self.d_head) for _ in range(self.h)]
-        
-        # projection layer
-        self.Wo = nn.Parameter(torch.randn(self.d, self.d))
-    
-    def forward(self, x):
-        # x shape: (batch_size, seq_len, d)
-        b, l, d = x.shape
-        x = x.view(b, l, self.h, self.d_head)  # (batch_size, seq_len, h, d_head)
-        
-        # now we transpose to get (seq_len, d_head) as the last two dims on whoch we apply self attention
-        x = x.transpose(1, 2)  # (batch_size, h, seq_len, d_head)
-        
-        # output = torch.concat([attn(x) for i, attn in enumerate(self.attention_blocks)], -1)
-        for i, attn in enumerate(self.attention_blocks):
-            x[:, i, :, :] = attn(x[:, i, :, :])      # each head gets its own self attention
-        
-        # now we transpose back seq_len and heads dimensions
-        x = x.transpose(1, 2)  # (batch_size, seq_len, h, d_head)
-        
-        # concat the outputs of all heads to get back to original shape
-        x = x.contiguous().view(b, l, d)   # (batch_size, seq_len, d)
-        
-        output = output @ self.Wo
-        return output
-
-```
-
-
-
-There is infact a small issue with the above implementation. We are not computing the attention scores of each head in parallel. You can see the for loop in there!
-
-A faster implementation of the multiheaded attention is as follows:
-
-```python
-class MultiHeadedAttention(nn.Module):
-    def __init__(self, heads, d):
-        super().__init__()
-        self.d = d
-        self.h = heads
-
-        assert self.d%self.h==0, "d must be divisible by num of heads"
-        self.d_head = self.d // self.h
-
-        # imagine all projection matrices of diff heads are stacked on top of each other
-        self.tokey= nn.Linear(self.d, self.d)
-        self.toquery= nn.Linear(self.d, self.d)
-        self.tovalue= nn.Linear(self.d, self.d)
-        
-        # output projection matrix
-        self.Wo = nn.Linear(self.d, self.d)
-
-        def forward(self, x):
-
-            b, l, d = x.shape
-            k = self.d_head
-            h = self.h
-            
-            # get Q,K,V 
-            Q = self.toquery(x).view(b,l,h,k).transpose(1,2)   # shape: (b,h,l,k)
-            K = self.tokey(x).view(b,l,h,k).transpose(1,2)   # shape: (b,h,l,k)
-            V = self.tovalue(x).view(b,l,h,k).transpose(1,2)   # shape: (b,h,l,k)
-            
-            # calculate attention
-            attention_scores = (Q @ K.transpose(-1,-2)) /  math.sqrt(k)
-            attention_probs = softmax(attention_scores, dim=-1)  # shape: (b,h,L,L)
-            
-            # apply attention
-            output = attention_probs @ V  # shape: (b,h,L,k)
-
-            # reshape into original shape (view can only be used in contiguous tensors. will it give error if not used?)
-            output = output.transpose(1,2).contiguous().view(b, l, d)
-            
-            # final projection layer
-            output = self.Wo(output)
-            
-            return output
-```
-</details>
-
-
-
-# Residual Connections
+## Residual Connections
 
 Residual connections are used to mitigate vanishing gradients in deep neural networks. They were first introduced in [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385) and have since been used in almost all deep neural networks.
 
@@ -646,62 +406,39 @@ $$
 \text{MHA}(x) = x + \text{MHA}(x)
 $$
 
+## Layer Normalization
 
-
-# Layer Normalization
-
-After the self attention block and residual connection, we apply layer normalization. Lets first understand how its predecessor, batch normalization works.  
-In CNNs we employ batch normalization to normalize the activations of each layer across the batch dimension. In batch normalization, for a batch of images of shape $B, H, W, C$, the mean $\mu$ and standard deviation $\sigma$ are calculated as follows:
+In CNNs we employ batch normalization to normalize the activations of each layer across the batch dimension. In batch normalization, for a batch of shape $B, H, W, C$, the mean $\mu$ and standard deviation $\sigma$ are calculated as follows:
 
 $$
-\mu = \frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} x_{b,h,w} 
+\mu = \frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} x_{b,h,w} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} (x_{b,h,w} - \mu)^2}
 $$
-
-<br>
-
-$$
-\sigma = \sqrt{\frac{1}{HWB} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{b=1}^{B} (x_{b,h,w} - \mu)^2}
-$$
-
-
 
 $$ 
 y_{b,h,w,c} = \gamma \frac{x_{b,h,w,c} - \mu}{\sigma} + \beta
 $$
 
-So during training in CNNs, we take mean and std across the batch dimension (its either cross features or across samples, batch denotes samples. In both cases we also take mean and std across the spatial dimensions(H,W or seq_len)) then subtract each channel value by the mean and divide by the std. This is done for each channel in the batch. To let the model still be able to model complex patterns, we add learnable parameters $\gamma$ and $\beta$ to the normalized values.
+So during training in CNNs, we take mean and std across the batch dimension (its either cross features or across samples, bathc denotes samples. In both cases we also take mean and std across the spatial dimensions(H,W or seq_len)) then subtract each channel value by the mean and divide by the std. This is done for each channel in the batch. To let the model still be able to model complex patterns, we add learnable parameters $\gamma$ and $\beta$ to the normalized values.
 During inference, we use the average mean and std calculated during training to normalize the activations.
 
 Note that the mean and standard deviation are calculated across the $H$, $W$, and $B$ dimensions for each channel $C$.
-But this would hinder parallization in transformers. So instead we use layer normalization. In layer normalization, we take mean and std across the feature dimension instead of the batch dimension; we subtract each channel value by the mean and divide by the std. Note that the feature dimension is 3d for images [$H,W,C$] or 2d for text [$L,d_{model}$].
+But this would hinder parallization in transformers. So instead we use layer normalization. In layer normalization, we take mean and std across the feature dimension (ie $H,W,C$ or $L,d_{model}$) then subtract each channel value by the mean and divide by the std.
 $$
-\mu = \frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} x_{h,w,c}
-$$
-
-$$
-\sigma = \sqrt{\frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} (x_{h,w,c} - \mu)^2}
+\mu = \frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} x_{h,w,c} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{HWC} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{c=1}^{C} (x_{h,w,c} - \mu)^2}
 $$
 
 Similarly in transformers, we take mean and std across the feature dimension (ie $L,d_{model}$) then subtract each value by the mean and divide by the std.
 $$
-\mu = \frac{1}{L \cdot d_{model}} \sum_{l=1}^{L}\sum_{d=1}^{d_{model}} x_{l,d}
-$$
-
-<br>
-
-$$
-\sigma = \sqrt{\frac{1}{L \cdot d_{model}} \sum_{l=1}^{L} \sum_{d=1}^{d_{model}} (x_{l,d} - \mu)^2}
+\mu = \frac{1}{L \cdot d_{model}} \sum_{l=1}^{L}\sum_{d=1}^{d_{model}} x_{l,d} \quad \text{and} \quad \sigma = \sqrt{\frac{1}{L \cdot d_{model}} \sum_{l=1}^{L} \sum_{d=1}^{d_{model}} (x_{l,d} - \mu)^2}
 $$
 
 $$
 y_{l,d} = \gamma \frac{x_{l,d} - \mu}{\sigma} + \beta
 $$
 
-<br>
-
 <center>
-     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/batch-norm-layer-norm.png" alt="batch norm vs layer norm" width="400" height="200" />
-     <figcaption>Fig: Batch norm vs layer norm, in this image, the batch norm is applied across the batch dimension, while the layer norm is applied across the feature dimension. Here, features can be 2d(text), 3d(images) as well.</figcaption>
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/batch-norm-layer-norm.png" alt="encoder" width="400" height="200" />
+     <figcaption>Fig: Batch norm vs layer norm</figcaption>
 </center>  
 
 
@@ -709,231 +446,26 @@ $$
 - **Learnable Parameters:** Both γ and β are *learnable* parameters. This means that the network can adjust them during training through backpropagation, just like the weights and biases of the layers.
 - **Undoing Normalization:** In the extreme case, the network can learn to set γ to the standard deviation of the original activations and β to the mean of the original activations. This would effectively "undo" the normalization and restore the original distribution if that's what's best for the task.  
 
+Here is an an excellent and intuitive explanation from [Pramod Goyal's excellent blog on transformers](https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block)
+
+<center>
+     <img src="https://raw.githubusercontent.com/mindadeepam/obsidian-vault/main/media/pramod-transformers-sa-intuition.png" alt="encoder" width="600" height="500" />
+     <figcaption>Fig: Self attention exlained, Transformers Laid Out - Pramod Goyal</figcaption>
+</center>    
+
+**As demonstrated self-attention is a linear transformation.**
+
 Now we have the final equation for the first half of the encoder block.
 
 $$
 \text{MHA}(x) = \text{LN}(\text{MHA}(x) + x)
 $$
-<br>
 
-<details>
-<summary>In code, we can implement this as follows:</summary>  
+---
 
+## WIP
 
-```python  
-# layer norm code
-class LayerNormalization(nn.Module):
-    def __init__(self, features, eps=1e-6):
-        super().__init__()
-        self.gamma = nn.Parameter(torch.ones(features))
-        self.beta = nn.Parameter(torch.zeros(features))
-        self.eps = eps
-
-    def forward(self, x):
-        # x is of shape B, H,W, C
-        mean = x.mean(-1, keepdim=True)
-        std = x.std(-1, keepdim=True)
-        return self.gamma * (x - mean) / (std + self.eps) + self.beta
-
-# batch norm code
-class BatchNormalization(nn.Module):
-    def __init__(self, features, eps=1e-6):
-        super().__init__()
-        self.gamma = nn.Parameter(torch.ones(features))
-        self.beta = nn.Parameter(torch.zeros(features))
-        self.eps = eps
-
-    def forward(self, x):
-        # x is of shape B, H,W, C
-        mean = x.mean(0, keepdim=True)
-        std = x.std(0, keepdim=True)
-        return self.gamma * (x - mean) / (std + self.eps) + self.beta
-
-```
-</details>
-
-# Point-wise Feed-Forward Network
-
-Notice how we say point-wise feed-forward network. This is because the feed-forward network is applied to each position in the sequence separately and identically. This is different from the feed-forward network in CNNs, where the same filter is applied to all positions in the sequence. Hence no information is shared between positions. Think of it this way, first we did a round of message passing between the tokens using linear transformations only. Now we apply non-linear transformations to each token independently via feed-forward network. Without this, the model would be unable to learn complex patterns. The dimensionality of input and output of this feed-forward block is  $d_{model} = 512$ and the inner-layer has dimensionality  $d_{ff} = 2048$ and the activation function used is ReLU.
-As mentioned earlier, this transformation is identical for each position in the sequence. This is because we are applying it on the embedding dimension of the sequence. After the feed-forward network, we apply add and layer-norm as before.
-
-<details>
-<summary>In code, we can implement this as follows:</summary>
-
-```python
-class FeedForwardNetwork(nn.Module):
-    def __init__(self, d_model, d_ff, activation=nn.ReLU()):
-        super().__init__()
-        self.fc1 = nn.Linear(d_model, d_ff)
-        self.fc2 = nn.Linear(d_ff, d_model)
-        self.activation = activation
-
-    def forward(self, x):
-        return self.fc2(self.activation(self.fc1(x)))
-```
-
-</details>
-
-so the second half of the encoder block is as follows:
-
-$$
-\text{FFN}(x) = \text{LN}(\text{FFN}(x) + x)
-$$
-
-
-
-At this point, we have completed the the encoder block. Lets now assemble it in pytorch.
-<details>
-<summary>code
-</summary>
-
-```python
-class EncoderBlock(nn.Module):
-    def __init__(self, d_model, d_ff, h, activation=nn.ReLU()):
-        super().__init__()
-        self.mha = MultiHeadAttention(d_model, h)
-        self.ffn = FeedForwardNetwork(d_model, d_ff, activation)
-        self.ln1 = LayerNormalization(d_model)
-        self.ln2 = LayerNormalization(d_model)
-
-    def forward(self, x):
-        x = x + self.mha(x)
-        x = self.ln1(x)
-        x = x + self.ffn(x)
-        x = self.ln2(x)
-        return x
-```
-</details>
-
-
-Since the paper used 6 layers of encoder blocks, we can stack them up to get the encoder.
-
-<details>
-<summary>code</summary>
-
-```python
-class Encoder(nn.Module):
-    def __init__(self, d_model, d_ff, h, n_layers, activation=nn.ReLU()):
-        super().__init__()
-        self.layers = nn.ModuleList([EncoderBlock(d_model, d_ff, h, activation) for _ in range(n_layers)])
-
-    def forward(self, x):
-        for layer in self.layers:
-            x = layer(x)
-        return x
-```
-</details>
-
-
-# Positional Encoding
-
-As I have mentioned, self-attention is a set operation. It does not know about the order of the tokens. So we need to add some information about the order of the tokens. This is done via positional encoding. They are vectors of the same dimension as the input embeddings and hence **can be element-wise added** to the input embeddings.
-
-A very basic approach would be to just use the position index as the positional encoding. But for larger indexes this might lead to exploding gradients.
-
-Hence, the reason we need PE (Positional Encoding) is to tell the model about the positions of different words relative to each other.
-Now, what will be the preferred characteristics of such a PE:
-
-1. **Unique encoding for each position**: Because otherwise it will keep changing for different length of sentences. Position 2 for a 10 word sentence will be different than for a 100 word sentence. This will hamper training as there is no predictable pattern that can be followed.
-2. **Linear relation between two encoded positions**: If I know the position p of one word, it should be easy to calculate the position p+k of another word. This will make it easier for the model to learn the patter.
-3. **Generalizes to longer sequences than those encountered in training**: If the model is limited by the length of the sentences used in training, it will never work in the real world.
-4. **Generated by a deterministic process the model can learn**: It should be a simple formula, or easily calculable algorithm. To help our model generalize better.
-5. **Extensible to multiple dimensions**: Different scenarios can have different dimensions, we want it to work in all cases.
-
-
-
-There are many ways to do positional encoding, both learned and fixed. The paper uses sine and cosine functions of different frequencies. 
-
-$$
-PE(pos, 2i) = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)
-$$
-
-$$
-PE(pos, 2i+1) = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)
-$$
-
-where $pos$ is the position of the token in the sequence and $i$ is the dimension of the embedding.
-
-You might think why use alternating sine and cosine functions?
-In the positional encoding section the authors say that, "“We chose this function because we hypothesized it would allow the model to easily learn to attend by relative positions, since for any fixed offset $k$, $PE(pos+k)$ can be represented as a linear function of $PE(pos)$.”"  
-Using the sin functions alone doesnt satisfy the property of linear relation between two encoded positions. Look at [this](https://blog.timodenk.com/linear-relationships-in-the-transformers-positional-encoding/) blog to look at how alternating sine and cosine functions satisfies this property.  
-
-The authors also tried learned positional embeddings but found that the fixed positional embeddings performed similar, while allowing for extrapolation to longer sequences.
-Also read [this](https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers#positional-encoding-visualization) for some more insights.
-
-
-Here is the code to generate the positional encoding matrix:
-
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-def get_pos_encoding(seq_len=512, embedding_dim=100, n=10000):
-    PE = np.zeros((seq_len, embedding_dim))
-    for pos in range(seq_len):
-        for i in range((embedding_dim)//2):
-            denominator = n**((2*i)/embedding_dim)
-            PE[pos][2*i] = np.sin(pos/denominator)
-            PE[pos][2*i+1] = np.cos(pos/denominator)
-    return PE
-
-PE = get_pos_encoding(seq_len=512, embedding_dim=100)
-print(f"shape of positional encoding matrix: {PE.shape}")
-
-plt.figure(figsize=(15, 7))
-plt.imshow(PE, aspect='auto', cmap='viridis')  # aspect='auto' to prevent squishing, cmap for better visualization
-plt.title("Positional Encoding Matrix for sequence length: 512 & embedding dimension: 100")
-plt.colorbar(label='Encoding Value')  # Add a colorbar to show the encoding values
-plt.grid(False) # remove grid lines
-plt.show()
-```
-
-    shape of positional encoding matrix: (512, 100)
-
-
-
-    
-![png](0_attention_is_all_u_need_files/0_attention_is_all_u_need_16_1.png)
-    
-
-
-
-```python
-## at a fixed index of embedding dimension, we can see the sine wave having increasing wave lengths:
-plt.figure(figsize=(20, 5))
-plt.plot(PE[:][0])
-plt.plot(PE[:][50])
-plt.plot(PE[:][99])
-plt.legend(['dim 0', 'dim 50', 'dim 99'])
-plt.title('Positional Encoding scross the sequence at a fixed embedding dimension')
-plt.show()
-
-## at a fixed index of position, we can see the sine wave having different phases:
-plt.figure(figsize=(20, 5))
-plt.plot(PE[0][:])
-plt.plot(PE[50][:])
-plt.plot(PE[99][:])
-plt.legend(['pos 0', 'pos 50', 'pos 99'])
-plt.title('Positional Encoding of different tokens in the sequence')
-plt.show()
-```
-
-
-    
-![png](0_attention_is_all_u_need_files/0_attention_is_all_u_need_17_0.png)
-    
-
-
-
-    
-![png](0_attention_is_all_u_need_files/0_attention_is_all_u_need_17_1.png)
-    
-
-
-
-
-# WIP
+- **Point-wise Feed-Forward Network**
 
 - **Dec block**
     
@@ -941,6 +473,8 @@ plt.show()
   - masked self attention
   - cross attention
   - diagrams
+
+- **Positional Encoding**
 
 
 - **Qs:**
@@ -958,8 +492,7 @@ plt.show()
   - According to Vaswani himself [13], the main advantage of the transformer architecture is that it is parallelizable. hence it makes training faster (attention paper reported 3* faster than similar sized RNN based models, this is because the attention is a simple linear operation. this makes it favourable to train via backprop/SGD).
   - he also says that if diff heads focused locally (based on posituib, like convolution does) instead of globally (globally but in lower dims) and if theere were many heads it would be like a convolution.
 
-# References 
-
+## References 
 <small>
 📕: must read  
 📘: good to read  
@@ -980,27 +513,24 @@ plt.show()
 [10] [Attention Is All You Need, Vaswani et al, 2017](https://arxiv.org/pdf/1706.03762) 📕  
 [11] [Attention? Attention! - Lilian Weng, 2018](https://lilianweng.github.io/posts/2018-06-24-attention/) 📘  
 [12] [The Illustrated Transformer - Jay Alammar, 2018](https://jalammar.github.io/illustrated-transformer/) 📕   
-[13] [Stanford CS224N: NLP with Deep Learning | Winter 2019 | Lecture 14 – Transformers and Self-Attention, Vaswani](https://www.youtube.com/watch?v=5vcj8kSwBCY) 📕   
-[14] [Transformers_laid_out, Pramod Goyal](https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block) 📘   
-[15] [The illustrated transformer, Jay Allamar](https://jalammar.github.io/illustrated-transformer/) 📘   
-[16] [The annotated transformer, Harvard NLP](https://nlp.seas.harvard.edu/annotated-transformer/) 📘   
+[13] [Stanford CS224N: NLP with Deep Learning | Winter 2019 | Lecture 14 – Transformers and Self-Attention, Vaswani](https://www.youtube.com/watch?v=5vcj8kSwBCY) 📕  
 
-I also recommend a few more resources that helped me:
+---
+Other resources:
 
-- [Another great detailed blog by Peter Bloem](https://peterbloem.nl/blog/transformers)
+- https://goyalpramod.github.io/blogs/Transformers_laid_out/#understanding-the-encoder-and-decoder-block   
+- https://nlp.seas.harvard.edu/annotated-transformer/ code-led explanation
+- https://jalammar.github.io/illustrated-transformer/ most famous blog on it ever ig
+- https://peterbloem.nl/blog/transformers another OG
 - [Attention? Attention! - Lilian Weng, 2018](https://lilianweng.github.io/posts/2018-06-24-attention/) : for a more indepth read on Attention mechanism and its usage elsewhere.
 - [The transformer family - lilian weng, 2020](https://lilianweng.github.io/posts/2020-04-07-the-transformer-family/): explains transformers and further advancements on the architecture.
 - https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/
 - https://mehta-rohan.com/writings/blog_posts/attention.html
-- [Stanford guest lecture of transformers by the lead author of the attention paper, Vaswani](https://www.youtube.com/watch?v=5vcj8kSwBCY)
-- [video on llama1 and llama2](https://www.youtube.com/watch?v=Mn_9W1nCFLo)
+- https://www.youtube.com/watch?v=5vcj8kSwBCY: stanford guest lecture of transformers by vaswani himself
 
 
 
-
-
-
-<!-- ---
+---
 
 <details>
 <summary>
@@ -1018,7 +548,7 @@ bination of Advanced Language Modeling Techniques, In: Proceedings of Interspeec
 - attention origins: [Generating Sequences With Recurrent Neural Networks, 2014](https://arxiv.org/pdf/1308.0850) -> [Neural Machine Translation by Jointly Learning to Align and Translate, 2014](https://arxiv.org/pdf/1409.0473) -> [Attention is all you need, 2017](https://arxiv.org/pdf/1706.03762.pdf)
 </details>
 
----
+**neural machine translation**
 
 <details><summary>Appendix</summary>
 
@@ -1029,7 +559,7 @@ $$p_1 \times p_2 \times p_3 \times p_4 = \exp(\log p_1 + \log p_2 + \log p_3 + \
 
 
 <details>
-<summary>[2] important papers in nlp leading upto attention/gpt/bert</summary>
+<summary>[2]</summary>
 Q. chatgpt give me a detailed long report of main papers in nlp leading upto attention/gpt/bert, each paper u mention must be a significant milestone in nlp that  advanced the field in some way.
 
 -> Okay, here is a detailed report tracing the significant milestones in NLP leading up to attention mechanisms, GPT, and BERT. This report focuses on key papers that advanced the field, particularly in the context of neural network-based approaches.
@@ -1139,16 +669,19 @@ These methods, while effective to some extent, struggled with the nuances and co
     *   Achieved state-of-the-art results on a wide range of NLP tasks, surpassing previous methods by a significant margin.
 *   **Impact:** BERT revolutionized the field of NLP by demonstrating the effectiveness of bidirectional pre-training. It became the dominant approach for many NLP tasks and set a new standard for performance.
 
+##### Conclusion
+
+The journey from early rule-based systems to today's powerful pre-trained language models like GPT and BERT has been marked by a series of significant breakthroughs. The introduction of neural networks, word embeddings, sequence-to-sequence models, and the attention mechanism were crucial steps that paved the way for the Transformer architecture and the era of pre-trained language models. These advancements have dramatically improved the performance of NLP systems and have opened up new possibilities for understanding and generating human language. The field continues to evolve rapidly, with ongoing research exploring new architectures, pre-training objectives, and applications of these powerful models.
 
 </details>
 
 [3]
 Cimputational complexity:
-``` python
+
 Self-Attention: O(length² · dim)  
 NN (LSTM): O(length · dim²)  
 Convolution: O(length · dim² · kernel_width)    
-```
+
 <details><summary>[4]</summary>
 The magic of information passing between tokens in self-attention lies in the attention mechanism itself. It allows each token to "attend" to every other token in the sequence and incorporate information from them into its own representation. Here's a step-by-step breakdown:
 
@@ -1201,4 +734,6 @@ In essence, self-attention allows each token to dynamically gather information f
 
 </details>
 
-</details> -->
+</details>
+
+
