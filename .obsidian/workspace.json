@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "7d0060980716b498",
+        "id": "fef7dca36da571aa",
         "type": "tabs",
         "children": [
           {
-            "id": "8c584d7535be2f65",
+            "id": "d31d29c4e1d437d2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "library/utils/git_utils.md",
+                "file": "fmt/Syncups.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "git_utils"
+              "title": "Syncups"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 225.50484466552734
+    "width": 299.5,
+    "collapsed": true
   },
   "right": {
     "id": "10048318e88c3884",
@@ -128,7 +129,9 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": false
+                "useHierarchy": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "Tags"
@@ -140,10 +143,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "library/misc/passwords.md"
+                "file": "fmt/Syncups.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of passwords"
+              "title": "Outline of Syncups"
             }
           },
           {
@@ -167,11 +173,11 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 433.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -186,55 +192,55 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8c584d7535be2f65",
+  "active": "d31d29c4e1d437d2",
   "lastOpenFiles": [
-    "media/embedding-layer-output.png",
+    "media/suzie.jpeg",
+    "suzieee.md",
+    "fmt/Syncups.md",
+    "fmt/team ++.md",
+    "to_do.md",
+    "fmt/gcp_to_aws_migration/aws deployments gh_actions.md",
+    "fmt/work_log.md",
     "library/misc/passwords.md",
+    "library/utils/git.md",
+    "project_ideas.md",
+    "fmt/gcp_to_aws_migration/aws authentication.md",
+    "library/notes/vision/CNN_for_object_detection.md",
+    "gcp_to_aws_migration.md",
+    "fmt/gcp_to_aws_migration",
+    "library/journal/2025-02-10_rising_up_the_ladder.md",
+    "blog_ideas.md",
+    "Untitled.canvas",
+    "index.md",
+    "personal tracker/2025-02/2025-02-08.md",
+    "personal tracker/2025-02",
+    "library/notes/aws.md",
+    "media/aws-config-ss.png",
+    "media/aws-configure-sso-sr.mov",
+    "media/aws-sso-configure-sr.mov",
+    "media/aws-access-keys-ss.png",
+    "media/illustrated-transformer-fig-21432.png",
+    "media/aws-access-portal.png",
+    "media/embedding-layer-output.png",
     "library/utils/conda_utils.md",
     "library/blogs/0_attention_is_all_u_need.md",
-    "blog-ideas.md",
-    "project-ideas.md",
     "query optimization.md",
-    "index.md",
-    "library/utils/git_utils.md",
     "library/utils/docker_utils.md",
     "library/utils/dvc.md",
     "personal tracker/2025-01/2025-01-14.md",
     "library/notes/CS/fastapi, uvicorn, gunicorn.md",
-    "fmt/aws authentication.md",
     "library/notes/CS/javascript.md",
     "media/Screenshot 2025-01-16 at 12.58.48 PM.png",
-    "library/notes/DSA/general_tips.md",
-    "library/notes/DSA/binary_search.md",
-    "library/notes/DSA/topic_wise.md",
-    "library/notes/CS/module_comparison_-_queue_vs_heapq.md",
-    "library/notes/CS/interpreted_vs_compiled_language.md",
-    "library/notes/Data_Science/How_to_deal_with_corrupt_labels_.md",
-    "library/notes/Focal_loss.md",
-    "library/notes/CS/python_(adv_obv).md",
-    "library/notes/aws.md",
-    "library/utils/cli_utils.md",
-    "personal tracker/2025-01/2025-01-07.md",
     "library/misc/Untitled",
     "personal tracker/2025-01",
     "media/seq2seq.png",
     "media/rnn_enc_dec.png",
     "media/pramod-transformers-sa-intuition.png",
     "media/lil-weng-attantion-fig-4.png",
-    "media/learning-to-jointly-align-and-translate-fig-2.png",
-    "media/illustrated-transformers-fig-12312.png",
-    "media/illustrated-transformer-fig-encoder-full-detailed.png",
-    "media/illustrated-transformer-fig-21432.png",
-    "media/illustrated-transformer-fig-6543.png",
     "library/blogs",
     "library/notes/CS",
     "library/notes/Data_Science",
     "temp.ipynb",
-    "library/notes/DL",
-    "Untitled.canvas",
-    "personal tracker/2023/weekly",
-    "personal tracker/2023",
-    "personal tracker/2024-12",
     "Untitled 1.canvas"
   ]
 }

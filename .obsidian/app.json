@@ -3,5 +3,8 @@
   "promptDelete": false,
   "spellcheck": false,
   "attachmentFolderPath": "media",
-  "showLineNumber": true
+  "showLineNumber": true,
+  "strictLineBreaks": true,
+  "propertiesInDocument": "visible",
+  "foldHeading": true
 }

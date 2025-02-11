@@ -14,7 +14,7 @@
 
 ## utils
 - [torch utils.md](./library/utils/torch_utils.md)
-- [git utils.md](./library/utils/git_utils.md)
+- [git utils.md](git.md)
 - [conda utils.md](./library/utils/conda_utils.md)
 - [common issues.md](./library/utils/common_issues.md)
 - [github.md](./library/utils/github.md)

@@ -83,5 +83,15 @@
       ],
       "key": "K"
     }
+  ],
+  "editor:delete-paragraph": [],
+  "editor:insert-link": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "V"
+    }
   ]
 }
