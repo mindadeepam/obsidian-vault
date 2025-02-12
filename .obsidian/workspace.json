@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "fef7dca36da571aa",
+        "id": "58d4e5e9533ec250",
         "type": "tabs",
         "children": [
           {
-            "id": "d31d29c4e1d437d2",
+            "id": "f2e8ea254f81dc59",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fmt/Syncups.md",
-                "mode": "preview",
+                "file": "to_do.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Syncups"
+              "title": "to_do"
+            }
+          },
+          {
+            "id": "b049809e4bdd8544",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "suzieee.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "suzieee"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5,
-    "collapsed": true
+    "width": 299.5
   },
   "right": {
     "id": "10048318e88c3884",
@@ -143,13 +157,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "fmt/Syncups.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Syncups"
+              "title": "Outline"
             }
           },
           {
@@ -192,16 +205,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d31d29c4e1d437d2",
+  "active": "b049809e4bdd8544",
   "lastOpenFiles": [
+    "library/misc/passwords.md",
+    "library/misc/suzie.md",
+    "to_do.md",
+    "fmt/Syncups.md",
+    "fmt/work_log.md",
+    "fmt/team ++.md",
     "media/suzie.jpeg",
     "suzieee.md",
-    "fmt/Syncups.md",
-    "fmt/team ++.md",
-    "to_do.md",
     "fmt/gcp_to_aws_migration/aws deployments gh_actions.md",
-    "fmt/work_log.md",
-    "library/misc/passwords.md",
     "library/utils/git.md",
     "project_ideas.md",
     "fmt/gcp_to_aws_migration/aws authentication.md",
@@ -236,7 +250,6 @@
     "media/seq2seq.png",
     "media/rnn_enc_dec.png",
     "media/pramod-transformers-sa-intuition.png",
-    "media/lil-weng-attantion-fig-4.png",
     "library/blogs",
     "library/notes/CS",
     "library/notes/Data_Science",

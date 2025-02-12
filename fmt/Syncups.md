@@ -17,6 +17,7 @@ MoM
 
 
 Action Items
+
 - [ ] Finish AWS Migration
 	- [x] block deepaks calender for aws migration. ✅ 2025-02-11
 	- [ ] complete it.
@@ -24,6 +25,7 @@ Action Items
 	- [ ] full ownership, no disturbances.., 
 	- [x] set up meeting with Deepak and Sukhpreet, ✅ 2025-02-11
 	- [ ] align evryone on what to build. be clear on what to build.
+	
 - [ ] **how can we contribute to REVENUE. (60percent for product features). need 1 idea from DS itself. what will it be??** 
 - [ ] project planning for next year.
 - [ ] review AOP.
