@@ -2,22 +2,19 @@
 [link to google doc](https://docs.google.com/document/d/1DTWQrfZUz2zBq5pEsvAGXwMzsMpqUXfhEKjgQDvSw0g/edit?tab=t.0#heading=h.bfr7dqk2ze6)
 
 
-## 11/02/2024
+## 2025-02-12
 ### Me
 - ✅ Achieved action items from last time.
 - What would you say are should be my top 3 things to focus on?
 - How to get out more from a team? I am willing to put in more time and guide them, but How to incentivize them?
 - Start an **AI this week** thing. dont mention this to deepak yet.
 
-MoM
+### MoM
 - how to improve as a team: focus on processes.
 - setting up default expectations.
 - be close-to-perfect yourself.
 
-
-
-Action Items
-
+### Action Items for feb
 - [ ] Finish AWS Migration
 	- [x] block deepaks calender for aws migration. ✅ 2025-02-11
 	- [ ] complete it.
@@ -41,11 +38,12 @@ Notes
 - Bad
 	- The team gets blocked on Deepam Minda a lot for a lot of small issues  
 	- There is lots of friction between tech and DS while integrating the fraud detection
-Action items
 
+Action items
 - [ ]     
 
-## 10th Jan, 2024
+## 2025-01-10
+
 ### Notes by me
 - take more responsibility, solve problems....  especially for others
 - community contribution (office projects bhi kar sakte ho) (tooling, )
@@ -62,6 +60,7 @@ Notes
 Action items
 - [ ] Create the Phase 1 version of the Supplier Agent by 27th Jan 2025
 
+### Action Items
 
 ## 13th December 2023
 - jot down some ideas i want to work on for the next 2-3 months,

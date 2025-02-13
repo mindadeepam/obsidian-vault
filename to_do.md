@@ -1,8 +1,8 @@
 # Long term
 1. [ ] transformers blog 📅 2025-02-16 
-2. [ ] [[work_log#^05d2c9|new ideas for fmt]]
+2. [ ] [new ideas for fmt](fmt/work_log.md#new-ideas-for-fmt), also discussed in [](fmt/Syncups.md#action-items-for-feb)
 3. [ ] you actually have pretty good blogs on some topics like cnns etc, put them out atleast. (make a markdown publishing service..., because using something else is just not worth it, youve wasted enought time on that)
-4. [ ] 
+
 
 # Short term
 

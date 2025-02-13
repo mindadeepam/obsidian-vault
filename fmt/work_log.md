@@ -1,6 +1,7 @@
 ## to do
 
- - [ ] come up with ideas for new initiatives/projects ^05d2c9
+### New ideas for FMT
+come up with ideas for new initiatives/projects that could contribute revenue
 
 ## Working On
 
