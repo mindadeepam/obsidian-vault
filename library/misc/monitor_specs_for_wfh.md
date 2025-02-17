@@ -1,4 +1,6 @@
 
+**update** @2025-02-01: got monitor Benq GW2790Q for 15000
+
 ## BENQ GW2790 | 27 inch 100Hz 99% sRGB Eye-Care Home Office Monitor  10,998.00
 
 - 27" Full HD 1080p Monitor

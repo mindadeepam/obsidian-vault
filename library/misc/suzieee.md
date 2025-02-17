@@ -19,7 +19,7 @@ I’m a fully trained pet and animal nutritionist. When it comes to your vet rec
 - chocolate
 - xylitol
 - grapes
-- bread/roti : cats make energy from protein. not from carbs. so no use giving bread/roti.
+- bread/roti : we make our energy from carbs but, cats make energy from protein. not from carbs. so no use giving bread/roti.
 
 
 
